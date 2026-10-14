@@ -610,7 +610,7 @@ function v120Calendar(){
 }
 function v120DayPanel(){
  const date=state.calSelected,entries=v120Entries(date),pretty=new Date(date+'T12:00:00').toLocaleDateString('hr-HR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- return `<div class="card day-panel"><div class="cardhead"><h3 style="text-transform:capitalize">${pretty}</h3><div class="minirow"><button class="smallbtn" data-gc-new="${date}">＋ Google događaj</button><button class="primary" data-cal-add="${date}">＋ Dodaj</button></div></div>${entries.length?entries.map(({label,o})=>`<div class="day-entry ${o.done||o.status==='Gotovo'?'done':''}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(label)} · ${esc(o.who||o.priority||'')} ${o.status?' · '+esc(o.status):''}</div></div>${label.startsWith('Google · ')?`<button class="smallbtn" data-gc-edit="${esc(o.calendarId)}" data-gc-event="${esc(o.id)}">Uredi</button>`:`<button class="smallbtn" data-edit="${label}:${o.id}">Uredi</button>`}</div>`).join(''):'<p class="tiny">Nema obveza za odabrani datum.</p>'}</div>`;
+ return `<div class="card day-panel"><div class="cardhead"><h3 style="text-transform:capitalize">${pretty}</h3><div class="minirow"><button class="primary" data-cal-add="${date}">＋ Dodaj</button></div></div>${entries.length?entries.map(({label,o})=>`<div class="day-entry ${o.done||o.status==='Gotovo'?'done':''}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(label)} · ${esc(o.who||o.priority||'')} ${o.status?' · '+esc(o.status):''}</div></div>${label.startsWith('Google · ')?`<button class="smallbtn" data-gc-edit="${esc(o.calendarId)}" data-gc-event="${esc(o.id)}">Uredi</button>`:`<button class="smallbtn" data-edit="${label}:${o.id}">Uredi</button>`}</div>`).join(''):'<p class="tiny">Nema obveza za odabrani datum.</p>'}</div>`;
 }
 other=function(){if(state.page!=='Kalendar')return v120OldOther();return `<div class="cal-v120"><div class="cal-filterbar">${v120Categories.map(([label])=>`<label><input type="checkbox" data-cal-filter="${label}" ${state.calFilters[label]?'checked':''}> ${label}</label>`).join('')}<label><input type="checkbox" data-google-filter ${state.calFilters['Google']!==false?'checked':''}> Google</label></div>${v120Calendar()}${v120DayPanel()}</div>`};
 // Početna stranica koristi istu oznaku događaja, a postojeći izgled kartice ostaje.
@@ -1699,51 +1699,184 @@ document.addEventListener('change',e=>{let t=e.target;if(t.dataset.gcSelect!==un
 </style>
 <style>
 .gc-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gc-form-grid .field{margin:0}.gc-form-hint{font-size:12px;color:var(--muted);line-height:1.5}.gc-event-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.gc-event-actions .right{display:flex;gap:8px}@media(max-width:600px){.gc-form-grid{grid-template-columns:1fr}}
-</style><script>
-/* v1.34.4: Google Calendar CRUD; separate from local event forms and card dragging. */
+</style><style>
+/* v1.35.5 — uredan Google/lokalni obrazac */
+.gce-unified>.field{margin-bottom:12px}
+.gce-check{display:flex;align-items:center;gap:8px;min-height:42px}
+.gce-check input{width:auto!important;min-width:16px;min-height:16px}
+.gce-unified select,.gce-unified input,.gce-unified textarea{max-width:100%;box-sizing:border-box}
+.gce-feedback{padding:10px 12px;border-radius:9px;background:rgba(200,70,55,.09);color:var(--text);font-size:12px;line-height:1.45}
+.gce-feedback[hidden],#gce-repeat-wrap[hidden]{display:none!important}
+.gce-danger{color:#b63333}
+.gc-form-hint{margin:9px 0;color:var(--muted)}
+@media(max-width:600px){.gc-event-actions .right{width:100%;justify-content:flex-end}}
+</style>
+<script>
+/* v1.35.5 — zajednički obrazac događaja (Google / lokalno), uređivanje i brisanje.
+   Google API ostaje iza postojeće Supabase Edge Function; tajne se ne izlažu pregledniku. */
 (function(){
+'use strict';
 const bridge=()=>window.lifeGoogleBridge;
-const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const html=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pad=n=>String(n).padStart(2,'0');
-const localDateTime=d=>{if(!d)return '';const x=new Date(d);if(isNaN(x))return '';return `${x.getFullYear()}-${pad(x.getMonth()+1)}-${pad(x.getDate())}T${pad(x.getHours())}:${pad(x.getMinutes())}`};
-const datePlus=(d,n)=>{const x=new Date(d+'T12:00:00');x.setDate(x.getDate()+n);return `${x.getFullYear()}-${pad(x.getMonth()+1)}-${pad(x.getDate())}`};
-let editing=null,busy=false;
-function openForm(day,calendarId='',eventId=''){
- const b=bridge();if(!b?.connected){toast('Prvo poveži Google račun u Postavkama.');return}
- const writable=b.cfg.calendars.filter(c=>b.cfg.selected.includes(c.id)&&['owner','writer'].includes(c.accessRole));
- if(!writable.length){toast('Odaberi kalendar s pravom uređivanja u Postavkama.');return}
- const event=eventId?b.events.find(e=>e.id===eventId&&e.calendarId===calendarId):null;
- if(eventId&&!event){toast('Događaj nije učitan. Osvježi kalendar.');return}
- editing=event?{id:event.id,calendarId:event.calendarId}:null;
- const chosen=event?.calendarId||b.cfg.defaultId||writable[0].id;
- const allDay=event?event.allDay:false;
- const start=event?(event.start.dateTime?localDateTime(event.start.dateTime):event.start.date):day;
- const end=event?(event.end.dateTime?localDateTime(event.end.dateTime):datePlus(event.end.date,-1)):day;
- const begin=allDay?start+'T09:00':start.includes('T')?start:day+'T09:00';
- const finish=allDay?end+'T10:00':end.includes('T')?end:day+'T10:00';
- const body=`<div class="gc-form-grid"><label class="field" style="grid-column:1/-1">Naziv događaja<input id="gce-title" value="${escapeHtml(event?.name||'')}" placeholder="Naziv događaja" autofocus></label><label class="field">Kalendar<select id="gce-calendar" class="select">${writable.map(c=>`<option value="${escapeHtml(c.id)}" ${chosen===c.id?'selected':''}>${escapeHtml(c.summary)}</option>`).join('')}</select></label><label class="field" style="display:flex;align-items:center;gap:8px"><input id="gce-allday" type="checkbox" ${allDay?'checked':''}> Cijeli dan</label><label class="field">Početak<input id="gce-start" type="datetime-local" value="${escapeHtml(begin)}"></label><label class="field">Završetak<input id="gce-end" type="datetime-local" value="${escapeHtml(finish)}"></label><label class="field" style="grid-column:1/-1">Lokacija<input id="gce-location" value="${escapeHtml(event?.location||'')}" placeholder="Neobavezno"></label><label class="field" style="grid-column:1/-1">Opis<textarea id="gce-description" rows="3">${escapeHtml(event?.description||'')}</textarea></label></div><p class="gc-form-hint">Promjene se spremaju izravno u Google Calendar. Za cjelodnevne događaje koristi se datum bez vremena. Premještanje u drugi kalendar nije dostupno pri uređivanju.</p>`;
- const actions=`<div class="gc-event-actions">${event?'<button class="smallbtn" data-gce-delete>Obriši iz Googlea</button>':'<span></span>'}<div class="right"><button class="smallbtn" data-close>Odustani</button><button class="primary" data-gce-save>${event?'Spremi promjene':'Dodaj u Google'}</button></div></div>`;
- modal(event?'Uredi Google događaj':'Novi Google događaj',body,actions);
- if(event)document.getElementById('gce-calendar').disabled=true;
- toggleAllDay();
+const localDT=s=>{
+ if(!s)return '';
+ const d=new Date(s);if(!Number.isFinite(d.getTime()))return '';
+ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
+const plusDays=(str,num)=>{
+ const d=new Date(str+'T12:00:00');d.setDate(d.getDate()+num);
+ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+};
+const validDay=s=>/^\d{4}-\d{2}-\d{2}$/.test(s||'');
+let editing=null, busy=false;
+const legacyForm=form;
+function info(message){const el=document.getElementById('gce-feedback');if(el){el.textContent=message;el.hidden=!message}else toast(message)}
+function writableCalendars(){const b=bridge();return b?.connected?(b.cfg.calendars||[]).filter(c=>b.cfg.selected.includes(c.id)&&['owner','writer'].includes(c.accessRole)):[]}
+function formEvent(date='',googleCal='',googleId='',localId=0){
+ const day=validDay(date)?date:validDay(state.calSelected)?state.calSelected:localISO(new Date());
+ const b=bridge();const writable=writableCalendars();
+ const gev=googleId?b?.events.find(e=>e.id===googleId&&e.calendarId===googleCal):null;
+ const lev=localId?state.events.find(e=>String(e.id)===String(localId)):null;
+ if(googleId&&!gev)return toast('Google događaj nije učitan. Osvježi kalendar.');
+ if(localId&&!lev)return toast('Lokalni događaj nije pronađen.');
+ if(gev&&!writable.some(c=>c.id===gev.calendarId))return toast('Za ovaj Google kalendar nemaš pravo uređivanja.');
+ editing=gev?{kind:'google',id:gev.id,calendarId:gev.calendarId}:lev?{kind:'local',id:lev.id}:null;
+ busy=false;
+ const allDay=gev?gev.allDay:lev?(lev.allDay||!lev.time):false;
+ const start=gev?(gev.start.dateTime?localDT(gev.start.dateTime):gev.start.date):lev?((lev.due||day)+'T'+(lev.time||'09:00')):day+'T09:00';
+ const end=gev?(gev.end.dateTime?localDT(gev.end.dateTime):plusDays(gev.end.date,-1)):lev?((lev.endDate||lev.due||day)+'T'+(lev.endTime||'10:00')):day+'T10:00';
+ const startVal=allDay?start.slice(0,10):start.includes('T')?start:start+'T09:00';
+ const endVal=allDay?end.slice(0,10):end.includes('T')?end:end+'T10:00';
+ let selected=gev?gev.calendarId:lev?'local':writable.some(c=>c.id===b?.cfg.defaultId)?b.cfg.defaultId:(writable[0]?.id||'local');
+ const calendars=`<option value="local" ${selected==='local'?'selected':''}>Lokalni događaj (samo ovaj preglednik)</option>`+
+   writable.map(c=>`<option value="${html(c.id)}" ${selected===c.id?'selected':''}>Google · ${html(c.summary)}</option>`).join('');
+ const isGoogle=selected!=='local';
+ const description=gev?.description||lev?.description||'';
+ const location=gev?.location||lev?.location||'';
+ const title=gev?.name||lev?.name||'';
+ const types=editing?'':`<label class="field">Vrsta zapisa<select id="gce-type" class="select"><option value="Događaji">Događaj</option><option value="Tasks">Zadatak (Tasks)</option><option value="Chores">Kućni posao (Chores)</option><option value="Reminders">Podsjetnik (Reminders)</option></select></label>`;
+ const repeatOpts=['Ne ponavlja se','Svaki dan','Svaki tjedan','Svaki mjesec','Svake godine'].map(x=>`<option ${lev?.repeat===x?'selected':''}>${x}</option>`).join('');
+ const body=`<div class="gce-unified">${types}
+ <label class="field">Naziv događaja<input id="gce-title" value="${html(title)}" placeholder="npr. Sastanak, liječnik, rođendan" maxlength="240"></label>
+ <div class="gc-form-grid">
+ <label class="field" style="grid-column:1/-1">Spremi u kalendar<select id="gce-calendar" class="select" ${editing?.kind==='google'?'disabled':''}>${calendars}</select></label>
+ <label class="field gce-check"><input id="gce-allday" type="checkbox" ${allDay?'checked':''}> Cijeli dan</label>
+ <div class="gce-spacer"></div>
+ <label class="field">Početak<input id="gce-start" type="${allDay?'date':'datetime-local'}" value="${html(startVal)}"></label>
+ <label class="field">Završetak${allDay?' (uključivo)':''}<input id="gce-end" type="${allDay?'date':'datetime-local'}" value="${html(endVal)}"></label>
+ <label class="field" style="grid-column:1/-1">Lokacija<input id="gce-location" value="${html(location)}" placeholder="Neobavezno"></label>
+ <label class="field" style="grid-column:1/-1">Opis<textarea id="gce-description" rows="3">${html(description)}</textarea></label>
+ <label class="field" id="gce-repeat-wrap" style="grid-column:1/-1" ${isGoogle?'hidden':''}>Ponavljanje (lokalno)<select id="gce-repeat">${repeatOpts}</select></label>
+ </div>
+ <p class="gc-form-hint" id="gce-source-hint">${isGoogle?'Događaj će se odmah spremiti u Google Calendar.':'Lokalni događaj ostaje samo u ovom pregledniku.'}</p>
+ ${!writable.length&&!editing?'<p class="gc-form-hint">Za Google događaje poveži račun i odaberi kalendar s pravom uređivanja u Postavkama.</p>':''}
+ <p id="gce-feedback" class="gce-feedback" role="alert" hidden></p></div>`;
+ const buttons=`<div class="gc-event-actions">${editing?`<button class="smallbtn gce-danger" data-gce-delete>${editing.kind==='google'?'Obriši iz Googlea':'Premjesti u koš'}</button>`:'<span></span>'}
+ <div class="right"><button class="smallbtn" data-close>Odustani</button><button class="primary" data-gce-save>${editing?'Spremi promjene':'Spremi događaj'}</button></div></div>`;
+ modal(editing?'Uredi događaj':'Novi događaj',body,buttons);
+ document.getElementById('gce-title')?.focus();
 }
-function toggleAllDay(){const box=document.getElementById('gce-allday');if(!box)return;for(const id of ['gce-start','gce-end']){const el=document.getElementById(id);const val=el.value;el.type=box.checked?'date':'datetime-local';el.value=box.checked?val.slice(0,10):val.length===10?val+'T09:00':val}}
-function setBusy(on){busy=on;for(const b of document.querySelectorAll('[data-gce-save],[data-gce-delete]'))b.disabled=on}
-async function save(){if(busy)return;const title=document.getElementById('gce-title')?.value.trim();const cal=document.getElementById('gce-calendar')?.value;const allDay=document.getElementById('gce-allday')?.checked;const start=document.getElementById('gce-start')?.value,end=document.getElementById('gce-end')?.value;
- if(!title||!cal||!start||!end)return toast('Popuni naziv, kalendar i vrijeme događaja.');
- let startObj,endObj;
- if(allDay){if(end<start)return toast('Završetak mora biti nakon početka.');startObj={date:start};endObj={date:datePlus(end,1)}}
- else {const a=new Date(start),z=new Date(end);if(!(z>a))return toast('Završetak mora biti nakon početka.');startObj={dateTime:a.toISOString()};endObj={dateTime:z.toISOString()}}
- const payload={summary:title,start:startObj,end:endObj,description:document.getElementById('gce-description').value,location:document.getElementById('gce-location').value};
- setBusy(true);try{await bridge().request(editing?'PATCH':'POST',cal,editing?.id||'',payload);close();toast(editing?'Google događaj ažuriran.':'Google događaj dodan.');await bridge().refresh()}catch(e){alert('Spremanje nije uspjelo: '+e.message)}finally{setBusy(false)}}
-async function remove(){if(busy||!editing)return;if(!confirm('Trajno obrisati ovaj događaj iz Google Calendara?'))return;setBusy(true);try{await bridge().request('DELETE',editing.calendarId,editing.id);close();toast('Google događaj obrisan.');await bridge().refresh()}catch(e){alert('Brisanje nije uspjelo: '+e.message)}finally{setBusy(false)}}
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
- if(b.hasAttribute('data-gc-new')){e.preventDefault();e.stopImmediatePropagation();openForm(b.dataset.gcNew);return}
- if(b.hasAttribute('data-gc-edit')){e.preventDefault();e.stopImmediatePropagation();openForm('',b.dataset.gcEdit,b.dataset.gcEvent);return}
- if(b.hasAttribute('data-gce-save')){e.preventDefault();e.stopImmediatePropagation();save();return}
- if(b.hasAttribute('data-gce-delete')){e.preventDefault();e.stopImmediatePropagation();remove();return}
+function changeAllDay(){
+ const whole=document.getElementById('gce-allday')?.checked;
+ for(const id of ['gce-start','gce-end']){
+  const el=document.getElementById(id);if(!el)continue;
+  const value=el.value;
+  el.type=whole?'date':'datetime-local';
+  el.value=whole?value.slice(0,10):value.length===10?value+(id==='gce-start'?'T09:00':'T10:00'):value;
+ }
+ const label=document.getElementById('gce-end')?.closest('label');if(label)label.firstChild.textContent=whole?'Završetak (uključivo)':'Završetak';
+}
+function busyUI(on){busy=on;document.querySelectorAll('[data-gce-save],[data-gce-delete]').forEach(el=>{el.disabled=on})}
+async function saveEvent(){
+ if(busy)return;
+ const type=document.getElementById('gce-type')?.value||'Događaji';
+ const startInput=document.getElementById('gce-start');
+ if(type!=='Događaji'){
+  const day=startInput?.value.slice(0,10)||localISO(new Date());
+  pendingDate=day;legacyForm(type,0);
+  if(document.getElementById('fDue'))document.getElementById('fDue').value=day;
+  pendingDate=null;return;
+ }
+ const title=document.getElementById('gce-title')?.value.trim()||'';
+ const cal=document.getElementById('gce-calendar')?.value||'local';
+ const allDay=!!document.getElementById('gce-allday')?.checked;
+ const start=startInput?.value||'',end=document.getElementById('gce-end')?.value||'';
+ if(!title)return info('Unesi naziv događaja.');
+ if(!start||!end)return info('Odaberi početak i završetak.');
+ if(allDay?end<start:!(new Date(end)>new Date(start)))return info('Završetak mora biti nakon početka (ili isti dan za cjelodnevni događaj).');
+ const description=document.getElementById('gce-description')?.value||'';
+ const location=document.getElementById('gce-location')?.value||'';
+ if(cal==='local'){
+  if(editing?.kind==='google')return info('Google događaj nije moguće premjestiti u lokalni kalendar uređivanjem.');
+  const local=editing?.kind==='local'?state.events.find(e=>String(e.id)===String(editing.id)):null;
+  if(editing?.kind==='local'&&!local)return info('Lokalni događaj više ne postoji.');
+  const o=local||{id:Date.now()+Math.floor(Math.random()*10000),done:false};
+  Object.assign(o,{name:title,due:start.slice(0,10),time:allDay?'':start.slice(11,16),endDate:end.slice(0,10),endTime:allDay?'':end.slice(11,16),allDay,description,location,repeat:document.getElementById('gce-repeat')?.value||o.repeat||'Ne ponavlja se'});
+  if(!local)state.events.unshift(o);
+  persist();close();render();toast(local?'Lokalni događaj ažuriran.':'Lokalni događaj dodan.');return;
+ }
+ if(editing?.kind==='local')return info('Za prijenos lokalnog događaja u Google izradi novi Google događaj.');
+ if(!bridge()?.connected)return info('Google nije povezan. Provjeri Postavke.');
+ if(!writableCalendars().some(c=>c.id===cal))return info('Nemaš pravo uređivanja odabranog Google kalendara.');
+ const startObj=allDay?{date:start}:{dateTime:new Date(start).toISOString()};
+ const endObj=allDay?{date:plusDays(end,1)}:{dateTime:new Date(end).toISOString()};
+ busyUI(true);info('Spremam u Google Calendar…');
+ try{
+  const payload={summary:title,start:startObj,end:endObj,description,location};
+  await bridge().request(editing?'PATCH':'POST',cal,editing?.id||'',payload);
+  close();toast(editing?'Google događaj ažuriran.':'Google događaj dodan.');
+  try{await bridge().refresh()}catch(refreshError){console.warn('Google osvježavanje nakon spremanja:',refreshError);toast('Događaj je spremljen; osvježi prikaz ako ga odmah ne vidiš.')}
+ }catch(err){info('Google spremanje nije uspjelo: '+(err?.message||String(err)))}
+ finally{busyUI(false)}
+}
+async function deleteEvent(){
+ if(busy||!editing)return;
+ const google=editing.kind==='google';
+ if(!confirm(google?'Trajno obrisati ovaj događaj iz Google Calendara?':'Premjestiti ovaj lokalni događaj u koš?'))return;
+ if(!google){
+  const i=state.events.findIndex(e=>String(e.id)===String(editing.id));
+  if(i<0)return info('Lokalni događaj nije pronađen.');
+  const [o]=state.events.splice(i,1);
+  state.trash.unshift({type:'Događaji',item:o,at:new Date().toLocaleString('hr-HR')});
+  persist();close();render();toast('Lokalni događaj premješten u koš.');return;
+ }
+ busyUI(true);info('Brišem iz Google Calendara…');
+ try{await bridge().request('DELETE',editing.calendarId,editing.id);close();toast('Google događaj obrisan.');try{await bridge().refresh()}catch(refreshError){console.warn('Google osvježavanje nakon brisanja:',refreshError);toast('Događaj je obrisan; osvježi prikaz ako ga još vidiš.')}}
+ catch(err){info('Google brisanje nije uspjelo: '+(err?.message||String(err)))}
+ finally{busyUI(false)}
+}
+// Zamjenjujemo isključivo obrazac događaja; ostali moduli i drag/drop ostaju isti.
+form=function(type,id){
+ if(type==='Događaji'){
+  const date=pendingDate||(state.page==='Kalendar'?state.calSelected:localISO(new Date()));pendingDate=null;
+  return formEvent(date,'','',id||0);
+ }
+ return legacyForm(type,id);
+};
+dayAdd=function(date){pendingDate=date;formEvent(date);pendingDate=null;};
+window.lifeOpenGoogleEvent=formEvent;
+document.addEventListener('click',e=>{
+ const btn=e.target.closest('button');if(!btn)return;
+ if(btn.hasAttribute('data-gc-new')){e.preventDefault();e.stopImmediatePropagation();formEvent(btn.dataset.gcNew);return}
+ if(btn.hasAttribute('data-gc-edit')){e.preventDefault();e.stopImmediatePropagation();formEvent('',btn.dataset.gcEdit,btn.dataset.gcEvent);return}
+ if(btn.hasAttribute('data-gce-save')){e.preventDefault();e.stopImmediatePropagation();void saveEvent();return}
+ if(btn.hasAttribute('data-gce-delete')){e.preventDefault();e.stopImmediatePropagation();void deleteEvent();return}
 },true);
-document.addEventListener('change',e=>{if(e.target?.id==='gce-allday')toggleAllDay()});
+document.addEventListener('change',e=>{
+ if(e.target?.id==='gce-allday'){changeAllDay();return}
+ if(e.target?.id==='gce-calendar'){
+  const google=e.target.value!=='local';
+  const repeat=document.getElementById('gce-repeat-wrap');if(repeat)repeat.hidden=google;
+  const tip=document.getElementById('gce-source-hint');if(tip)tip.textContent=google?'Događaj će se odmah spremiti u Google Calendar.':'Lokalni događaj ostaje samo u ovom pregledniku.';
+ }
+ if(e.target?.id==='gce-type'){
+  const t=e.target.value;
+  const form=e.target.closest('.gce-unified');
+  if(form){for(const el of form.children){if(el===e.target.closest('label'))continue;el.hidden=t!=='Događaji'} }
+  const btn=document.querySelector('[data-gce-save]');if(btn)btn.textContent=t==='Događaji'?'Spremi događaj':'Nastavi na '+t;
+ }
+});
 })();
 </script>
 
