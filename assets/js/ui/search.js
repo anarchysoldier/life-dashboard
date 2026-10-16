@@ -1,0 +1,15 @@
+
+/* v1.25 – pretraga isključivo lokalno spremljenih zapisa */
+(function(){
+ const types=[['Tasks','tasks'],['Chores','chores'],['Shopping','shopping'],['Reminders','reminders'],['Notes','notes'],['Događaji','events']];
+ let term='';
+ const plain=x=>{const d=document.createElement('div');d.innerHTML=String(x||'');return d.textContent||''};
+ function index(){const out=[];for(const [type,key] of types){for(const x of Array.isArray(state[key])?state[key]:[]){const title=String(x.name||x.title||x.item||'Bez naziva');const desc=[x.description,x.body,plain(x.html),x.folder,x.tags,x.category,x.store,x.area,x.who,x.due,x.time].filter(Boolean).join(' · ');out.push({type,id:x.id,title,desc});}}return out}
+ function escLocal(v){return esc(String(v??''))}
+ function results(){const list=document.getElementById('v125Results');if(!list)return;const q=term.trim().toLocaleLowerCase('hr-HR');if(!q){list.innerHTML='<div class="tiny" style="padding:18px">Upiši pojam za pretraživanje svih modula.</div>';return}const matches=index().filter(x=>(x.title+' '+x.desc).toLocaleLowerCase('hr-HR').includes(q)).slice(0,100);list.innerHTML=matches.map((x,i)=>`<button class="v125-result" data-v125-open="${i}"><strong>${escLocal(x.title)}</strong><small>${escLocal(x.type)}${x.desc?' · '+escLocal(x.desc.slice(0,180)):''}</small></button>`).join('')||'<div class="tiny" style="padding:18px">Nema rezultata za ovaj pojam.</div>';list._matches=matches;}
+ function close(){document.getElementById('v125Shade')?.remove()}
+ function open(){if(document.getElementById('v125Shade'))return;term='';const wrap=document.createElement('div');wrap.id='v125Shade';wrap.className='v125-shade';wrap.innerHTML='<div class="v125-dialog" role="dialog" aria-modal="true" aria-label="Globalna tražilica"><div class="v125-top"><span>⌕</span><input id="v125Input" autocomplete="off" placeholder="Pretraži zadatke, poslove, bilješke…" aria-label="Pojam za pretragu"><button class="smallbtn" id="v125Close" aria-label="Zatvori">✕</button></div><div class="v125-results" id="v125Results"></div><div class="v125-footer">Pretraga na ovom uređaju · Ctrl + K za otvaranje · Esc za zatvaranje</div></div>';document.body.appendChild(wrap);wrap.addEventListener('click',e=>{if(e.target===wrap||e.target.closest('#v125Close'))return close();const b=e.target.closest('[data-v125-open]');if(!b)return;const x=document.getElementById('v125Results')._matches[Number(b.dataset.v125Open)];if(!x)return;close();nav(x.type);state.search=x.title;render();});wrap.querySelector('#v125Input').addEventListener('input',e=>{term=e.target.value;results()});results();wrap.querySelector('#v125Input').focus()}
+ function button(){if(document.getElementById('v125SearchBtn'))return;const b=document.createElement('button');b.id='v125SearchBtn';b.className='primary v125-searchbtn';b.textContent='⌕ Pretraži';b.title='Globalna tražilica (Ctrl + K)';b.addEventListener('click',open);document.body.appendChild(b)}
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();open()}else if(e.key==='Escape'&&document.getElementById('v125Shade'))close()});
+ button();
+})();

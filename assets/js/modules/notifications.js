@@ -1,0 +1,29 @@
+
+/* v1.27 - Lokalni podsjetnici i centar obavijesti. */
+(function(){
+const NOTIFKEY='life-dashboard-v127-notifications';
+let records=[];try{records=JSON.parse(localStorage.getItem(NOTIFKEY)||'[]');if(!Array.isArray(records))records=[]}catch{}
+function store(){localStorage.setItem(NOTIFKEY,JSON.stringify(records.slice(0,500)))}
+function unread(){return records.filter(x=>!x.read).length}
+function badge(){const el=document.getElementById('notifCount');if(el){const n=unread();el.textContent=n?String(n):'';el.style.display=n?'':'none'}}
+function addNotice(title,detail,key){if(records.some(x=>x.key===key))return;records.unshift({id:Date.now()+Math.random(),key,title,detail,at:new Date().toISOString(),read:false});store();badge();toast('🔔 '+title);if('Notification'in window&&Notification.permission==='granted'){try{new Notification(title,{body:detail})}catch{}}}
+function center(){
+ const old=document.getElementById('v127Panel');
+ const panel=old||document.createElement('div');
+ panel.id='v127Panel';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Obavijesti');
+ panel.innerHTML=`<div class="v127p-head"><strong>Obavijesti</strong><span class="v127p-count">${unread()?unread()+' novih':''}</span><button class="v127p-icon" data-v127-dismiss title="Zatvori" aria-label="Zatvori">×</button></div><div class="v127p-list">${records.length?records.slice(0,50).map(x=>`<div class="v127p-entry ${x.read?'':'v127p-unread'}"><span class="v127p-dot"></span><div class="v127p-copy"><div class="v127p-title">${esc(x.title)}</div><div class="v127p-meta">${esc(x.detail)} · ${new Date(x.at).toLocaleString('hr-HR')}</div></div>${x.read?'':`<button class="v127p-icon" data-v127-read="${x.id}" title="Označi pročitanim" aria-label="Označi pročitanim">✓</button>`}</div>`).join(''):'<p class="v127p-empty">Nema obavijesti.</p>'}</div><div class="v127p-footer"><button data-v127-readall>Označi sve pročitanim</button><button data-v127-clear>Obriši pročitane</button><button class="v127p-icon" data-v127-permission title="Omogući obavijesti sustava" aria-label="Omogući obavijesti sustava">⚙</button></div>`;
+ if(!old)document.body.appendChild(panel);
+ const bell=document.getElementById('notif');const r=bell.getBoundingClientRect();
+ const width=Math.min(350,innerWidth-24);panel.style.width=width+'px';
+ panel.style.left=Math.max(12,Math.min(innerWidth-width-12,r.right-width))+'px';
+ panel.style.top=Math.min(innerHeight-20,r.bottom+8)+'px';
+}
+
+// Prilagodi formu Events / Reminders bez promjene ostalih modula.
+const oldForm=form;form=function(type,id){oldForm(type,id);if(!['Reminders','Događaji'].includes(type))return;const o=(type==='Reminders'?state.reminders:state.events).find(x=>String(x.id)===String(id))||{};const actions=document.querySelector('#overlay .modal .actions');if(!actions)return;const label=document.createElement('label');label.className='field';label.innerHTML=`Obavijesti me<select id="v127Offset"><option value="none">Bez obavijesti</option><option value="0">U vrijeme događaja</option><option value="5">5 minuta prije</option><option value="15">15 minuta prije</option><option value="30">30 minuta prije</option><option value="60">1 sat prije</option><option value="1440">1 dan prije</option></select>`;actions.before(label);document.getElementById('v127Offset').value=String(o.alertOffset??(type==='Reminders'?0:'none'))};
+const oldSave=saveForm;saveForm=function(type,id){const has=['Reminders','Događaji'].includes(type),offset=has?document.getElementById('v127Offset')?.value:null,name=has?document.getElementById('fName')?.value.trim():null;oldSave(type,id);if(has&&name&&offset!==null){const arr=type==='Reminders'?state.reminders:state.events;const o=id?arr.find(x=>String(x.id)===String(id)):arr.find(x=>x.name===name);if(o){o.alertOffset=offset;persist();scan()}}};
+const oldRender=render;render=function(){oldRender();badge()};
+function scan(){const now=Date.now();const from=new Date(now-60000);const to=new Date(now+86400000+60000);for(const [type,arr] of [['Reminders',state.reminders],['Događaji',state.events]]){for(const o of arr){if(o.alertOffset===undefined||o.alertOffset==='none'||!o.time||!o.due||o.done||o.status==='Gotovo')continue;let dates=[];try{dates=typeof v120Occurrences==='function'?v120Occurrences(o,type,localISO(from),localISO(to)):[o.due]}catch{dates=[o.due]};for(const day of dates){if(!/^\d{4}-\d{2}-\d{2}$/.test(day))continue;const when=new Date(day+'T'+o.time+':00').getTime()-Number(o.alertOffset)*60000;if(!Number.isFinite(when))continue;if(now>=when&&now-when<60000){addNotice(o.name,`${type} · ${day} u ${o.time}`,`${type}:${o.id}:${day}:${o.time}:${o.alertOffset}`)}}}}}
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='notif'){e.preventDefault();e.stopImmediatePropagation();if(document.getElementById('v127Panel'))document.getElementById('v127Panel').remove();else center();return}if(b.dataset.v127Dismiss!==undefined){document.getElementById('v127Panel')?.remove();return}if(b.dataset.v127Readall!==undefined){records.forEach(x=>x.read=true);store();center();badge();return}if(b.dataset.v127Read!==undefined){const x=records.find(x=>String(x.id)===b.dataset.v127Read);if(x)x.read=true;store();center();badge();return}if(b.dataset.v127Clear!==undefined){records=records.filter(x=>!x.read);store();center();badge();return}if(b.dataset.v127Permission!==undefined){if(!('Notification'in window)){toast('Preglednik ne podržava obavijesti sustava.');return}try{const permission=await Notification.requestPermission();toast(permission==='granted'?'Obavijesti sustava omogućene.':'Dopuštenje nije odobreno.')}catch{toast('Obavijesti sustava nisu dostupne u ovom načinu otvaranja.')}return}},true);
+badge();scan();setInterval(scan,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)scan()});
+})();
