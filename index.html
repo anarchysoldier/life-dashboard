@@ -1,62 +1,82 @@
-<!doctype html><html lang="hr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Life Dashboard · v1.35.9 · Notion uvoz</title>
+<!doctype html><html lang="hr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Life Dashboard · v1.42 · Multi-tenant</title>
 
 <link rel="stylesheet" href="./assets/css/app.css">
-</head><body>
-<div id="authGate" hidden role="dialog" aria-modal="true" aria-label="Prijava u Life Dashboard"><div class="auth-box">
+</head><body class="auth-locked">
+<div id="authGate" role="dialog" aria-modal="true" aria-label="Prijava u Life Dashboard"><div class="auth-box">
 <div class="auth-brand">⌂ Life Dashboard</div><div class="auth-sub">Prijavi se u svoj osobni prostor.</div>
-<div class="auth-tabs"><button type="button" id="authTabLogin" class="active">Prijava</button><button type="button" id="authTabSignup" hidden disabled>Registracija</button></div>
-<p class="auth-help">Pristup je moguć samo uz poziv administratora. Podaci ovog uređaja čuvaju se nešifrirano u pregledniku; prijava ih ne štiti od osobe koja ima pristup istom profilu preglednika.</p><form id="authForm" autocomplete="on"><label for="authEmail">E-mail adresa</label><input id="authEmail" type="email" autocomplete="email" required placeholder="ime@primjer.com"><label for="authPassword">Lozinka</label><div class="auth-pw"><input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="Lozinka"><button type="button" id="authShowPassword" aria-label="Prikaži lozinku">◉</button></div><div id="authRepeatWrap" class="auth-hidden"><label for="authRepeat">Ponovi lozinku</label><input id="authRepeat" type="password" autocomplete="new-password" placeholder="Ponovi lozinku"></div><div class="auth-row"><label><input id="authRemember" type="checkbox" checked> Zapamti me</label><button type="button" id="authForgot" class="auth-link">Zaboravljena lozinka?</button></div><button type="submit" class="auth-submit" id="authSubmit">Prijavi se</button><div class="auth-error" id="authMessage" role="status" aria-live="polite"></div></form>
+<div class="auth-tabs"><button type="button" id="authTabLogin" class="active">Prijava</button><button type="button" id="authTabSignup" hidden>Registracija</button></div>
+<p class="auth-help">Pristup je moguć samo uz poziv administratora. Podaci ovog uređaja čuvaju se nešifrirano u pregledniku; prijava ih ne štiti od osobe koja ima pristup istom profilu preglednika.</p><form id="authForm" autocomplete="on"><div id="authNameWrap" class="auth-hidden"><label for="authName">Ime i prezime</label><input id="authName" type="text" autocomplete="name" placeholder="npr. Emanuel Sabolović" maxlength="80"></div><label for="authEmail">E-mail adresa</label><input id="authEmail" type="email" autocomplete="email" required placeholder="ime@primjer.com"><label for="authPassword">Lozinka</label><div class="auth-pw"><input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="Lozinka"><button type="button" id="authShowPassword" aria-label="Prikaži lozinku">◉</button></div><div id="authRepeatWrap" class="auth-hidden"><label for="authRepeat">Ponovi lozinku</label><input id="authRepeat" type="password" autocomplete="new-password" placeholder="Ponovi lozinku"></div><div class="auth-row"><label><input id="authRemember" type="checkbox" checked> Zapamti me</label><button type="button" id="authForgot" class="auth-link">Zaboravljena lozinka?</button></div><button type="submit" class="auth-submit" id="authSubmit">Prijavi se</button><div class="auth-error" id="authMessage" role="status" aria-live="polite"></div></form>
 <details id="authSetup" style="display:none"><summary>⚙ Početna konfiguracija Supabasea</summary><p class="auth-help">Administrator jednom unosi URL projekta i javni publishable/anon ključ. Nikad ne unositi service_role ili secret ključ. Za trajnu konfiguraciju na svim uređajima vrijednosti se kasnije upisuju u konfiguraciju aplikacije.</p><label for="authUrl">Supabase Project URL</label><input id="authUrl" type="url" placeholder="https://projekt.supabase.co"><label for="authKey">Publishable / anon key</label><input id="authKey" type="text" placeholder="sb_publishable_... ili eyJ..."><button type="button" id="authSaveConfig" class="auth-submit">Spremi konfiguraciju</button><p class="auth-help">Registracija zahtijeva uključenu Email prijavu u Supabase Auth. Potvrda e-maila i dopuštene redirect adrese podešavaju se u Supabaseu.</p></details>
 </div></div>
-<div class="app"><aside class="sidebar"><div class="brand"><i>⌂</i> Life Dashboard</div><div class="nav" id="nav"></div><div class="sidefoot">● <span id="syncSide">Online · sve sinkronizirano</span><br>Life Dashboard v1.35.8<br>Supabase + Google</div></aside><main class="main"><header class="topbar"><div><h1 id="pageTitle">Dobro jutro ☀️</h1><div class="sub" id="pageSub">Vaše kućanstvo, na jednom mjestu.</div></div><div class="topright"><select id="house" class="select" title="Kućanstvo"><option>🏠 Dom</option><option>🏡 Vikendica</option></select><div id="headerClock" class="header-clock" aria-label="Trenutačni datum i vrijeme"><span id="headerClockDate"></span><strong id="headerClockTime"></strong></div><button class="iconbtn" id="theme" title="Promijeni temu">◐</button><button class="iconbtn relative" id="notif" title="Obavijesti">🔔 <span id="notifCount">3</span></button><div class="relative"><button class="primary" id="add">＋ Dodaj</button><div class="menu hide" id="addMenu"></div></div></div></header><section id="content"></section></main></div><nav class="bottomnav" id="bottomnav"></nav><div id="overlay"></div><div id="toastArea"></div><script src="./assets/js/core/app.js"></script>
+<div class="app"><aside class="sidebar"><div class="brand"><i>⌂</i> Life Dashboard</div><div class="nav" id="nav"></div><div class="sidefoot">● <span id="syncSide">Online · sve sinkronizirano</span><br>Life Dashboard v1.42<br>Supabase + Google</div></aside><main class="main"><header class="topbar"><div><h1 id="pageTitle">Dobro jutro ☀️</h1><div class="sub" id="pageSub">Vaše kućanstvo, na jednom mjestu.</div></div><div class="topright"><select id="house" class="select" title="Kućanstvo"><option>🏠 Dom</option><option>🏡 Vikendica</option></select><div id="headerClock" class="header-clock" aria-label="Trenutačni datum i vrijeme"><span id="headerClockDate"></span><strong id="headerClockTime"></strong></div><button class="iconbtn" id="theme" title="Promijeni temu">◐</button><button class="iconbtn relative" id="notif" title="Obavijesti">🔔 <span id="notifCount">3</span></button><div class="relative"><button class="primary" id="add">＋ Dodaj</button><div class="menu hide" id="addMenu"></div></div></div></header><section id="content"></section></main></div><nav class="bottomnav" id="bottomnav"></nav><div id="overlay"></div><div id="toastArea"></div>
+
+<!-- ============================================================
+     1. CORE moduli (raspored, tasks, kalendar, notes...)
+     ============================================================ -->
+<script src="./assets/js/core/app.js"></script>
 <script src="./assets/js/modules/tasks.js"></script>
-<script src="./assets/js/modules/shopping.js"></script><script src="./assets/js/modules/calendar.js"></script><script src="./assets/js/modules/recurrence.js"></script><script src="./assets/js/modules/notes.js"></script>
+<script src="./assets/js/modules/shopping.js"></script>
+<script src="./assets/js/modules/calendar.js"></script>
+<script src="./assets/js/modules/recurrence.js"></script>
+<script src="./assets/js/modules/notes.js"></script>
 
+<!-- ============================================================
+     2. Srednji sloj (aktivnosti, pretraga, favoriti, obavijesti)
+     ============================================================ -->
 <script src="./assets/js/modules/activity-base.js"></script>
-
 <script src="./assets/js/ui/search.js"></script>
-
 <script src="./assets/js/modules/favorites.js"></script>
-
 <script src="./assets/js/ui/item-actions.js"></script>
-
 <script src="./assets/js/modules/notifications.js"></script>
-
 <script src="./assets/js/ui/card-colors.js"></script>
 
+<!-- ============================================================
+     3. Prvi render (nakon što su svi moduli učitani)
+     ============================================================ -->
 <script src="./assets/js/core/initial-render.js"></script>
 
+<!-- ============================================================
+     4. Dodatni UI sloj
+     ============================================================ -->
 <script src="./assets/js/ui/notification-panel.js"></script>
-
 <script src="./assets/js/modules/recurring-completion.js"></script>
-
 <script src="./assets/js/ui/clock.js"></script>
-
 <script src="./assets/js/modules/activity-log.js"></script>
-
 <script src="./assets/js/modules/statistics.js"></script>
-
 <script src="./assets/js/ui/calendar-controls.js"></script>
-
 <script src="./assets/js/ui/task-controls.js"></script>
-
 <script src="./assets/js/ui/card-drag-preview.js"></script>
-
 <script src="./assets/js/modules/backup.js"></script>
-
 <script src="./assets/js/ui/card-drag.js"></script>
 
+<!-- ============================================================
+     5. Integracije (Google Calendar, Notion, event editor)
+     ============================================================ -->
 <script src="./assets/js/integrations/google-calendar.js"></script>
-
 <script src="./assets/js/ui/event-editor.js"></script>
+<script src="./assets/js/integrations/notion-import.js"></script>
 
+<!-- ============================================================
+     6. Auth i cloud sync — MORAJU biti zadnji.
+        Redoslijed: CDN → supabase-auth → cloud-sync
+     ============================================================ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="./assets/js/auth/supabase-auth.js"></script>
+<script src="./assets/js/auth/cloud-sync.js"></script>
 
-<!-- v1.35.8: Iskljucivo lokalizacija prikazanog naziva modula.
-     Interni kljucevi Chores i data-* atributi ostaju netaknuti radi kompatibilnosti. -->
-
+<!-- Lokalizacija prikazanog naziva modula (Chores → Kućni poslovi).
+     Interni ključevi i data-* atributi ostaju netaknuti radi kompatibilnosti. -->
 <script src="./assets/js/ui/localization.js"></script>
 
-<script src="./assets/js/integrations/notion-import.js"></script>
+<!-- Safety net: ako se Supabase ne učita u 8s, otključaj dashboard. -->
+<script>
+setTimeout(function(){
+  if(document.body.classList.contains('auth-locked') && !window.lifeSupabaseClient){
+    console.warn('[bootstrap] Supabase se nije učitao u 8s, otključavam dashboard.');
+    document.body.classList.remove('auth-locked');
+    var g=document.getElementById('authGate');
+    if(g)g.hidden=true;
+  }
+},8000);
+</script>
 </body></html>

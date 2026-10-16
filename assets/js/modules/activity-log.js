@@ -1,3 +1,6 @@
+/* v1.29 — evidencija stvarno spremljenih promjena; bez ograničenja broja zapisa.
+   v1.31 — debounce diff-a + preuzimanje notify() poruke iz _pendingActivityMsg.
+   v1.32 — lifeActivityResetSnapshot() za cloud-sync pull bez lažnih "Uređeno". */
 (function(){
  const keys=[['Tasks','tasks'],['Chores','chores'],['Shopping','shopping'],['Notes','notes'],['Reminders','reminders'],['Događaji','events']];
  const clone=x=>JSON.parse(JSON.stringify(x||[]));
@@ -12,7 +15,7 @@
    const pending=window._pendingActivityMsg||'';
    window._pendingActivityMsg='';
    const msg=pending||`${action}: ${name}`;
-   state.activity.unshift({at:now.toLocaleString('hr-HR'),iso:now.toISOString(),action,module,member:'Lokalni korisnik',msg});
+   state.activity.unshift({at:now.toLocaleString('hr-HR'),iso:now.toISOString(),action,module,member:window.lifeCurrentUserName||'Lokalni korisnik',msg});
  }
  function compare(module,key){
    const before=previous[key]||[],after=Array.isArray(state[key])?state[key]:[];
@@ -66,4 +69,11 @@
  document.addEventListener('change',e=>{const k=e.target.dataset?.v129Filter;if(!k)return;filter[k]=e.target.value;filter.page=0;render()},true);
  document.addEventListener('input',e=>{if(e.target.dataset?.v129Filter!=='q')return;const pos=e.target.selectionStart;filter.q=e.target.value;filter.page=0;const el=document.getElementById('content');if(el){el.innerHTML=renderLog();const inp=el.querySelector('[data-v129-filter="q"]');inp?.focus();inp?.setSelectionRange(pos,pos)}},true);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-v129-page],[data-v129-reset]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.hasAttribute('data-v129-reset'))Object.assign(filter,{module:'Svi',action:'Sve',member:'Svi',from:'',to:'',q:'',page:0});else filter.page+=b.dataset.v129Page==='next'?1:-1;render()},true);
+
+ // Resetiraj snapshot bez logiranja. Cloud-sync poziva ovo nakon pull-a
+ // kako pull iz Supabasea ne bi izgledao kao masovno "Uređeno".
+ window.lifeActivityResetSnapshot=function(){
+   for(const [module,key] of keys)previous[key]=clone(state[key]);
+   previous.trash=clone(state.trash);
+ };
 })();
