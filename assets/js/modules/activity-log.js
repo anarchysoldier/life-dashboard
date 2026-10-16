@@ -1,16 +1,19 @@
-
-/* v1.29 — evidencija stvarno spremljenih promjena; bez ograničenja broja zapisa. */
 (function(){
  const keys=[['Tasks','tasks'],['Chores','chores'],['Shopping','shopping'],['Notes','notes'],['Reminders','reminders'],['Događaji','events']];
  const clone=x=>JSON.parse(JSON.stringify(x||[]));
  let previous=Object.fromEntries([...keys.map(([,k])=>k),'trash'].map(k=>[k,clone(state[k])]));
  const originalPersist=persist;
- const realLog=v123Log;
- // Stari click-logger bilježio je i neuspješne klikove. Novi prati stvarne promjene.
  v123Log=function(){};
  let busy=false;
  function label(o){return String(o?.name||o?.title||o?.item||o?.text||'Bez naziva').slice(0,130)}
- function add(action,module,name){state.activity=Array.isArray(state.activity)?state.activity:[];const now=new Date();state.activity.unshift({at:now.toLocaleString('hr-HR'),iso:now.toISOString(),action,module,member:'Lokalni korisnik',msg:`${action}: ${name}`});}
+ function add(action,module,name){
+   state.activity=Array.isArray(state.activity)?state.activity:[];
+   const now=new Date();
+   const pending=window._pendingActivityMsg||'';
+   window._pendingActivityMsg='';
+   const msg=pending||`${action}: ${name}`;
+   state.activity.unshift({at:now.toLocaleString('hr-HR'),iso:now.toISOString(),action,module,member:'Lokalni korisnik',msg});
+ }
  function compare(module,key){
    const before=previous[key]||[],after=Array.isArray(state[key])?state[key]:[];
    const oldMap=new Map(before.map((o,i)=>[String(o.id??'index-'+i),o]));
@@ -25,21 +28,25 @@
    for(const [id,o] of oldMap)if(!newMap.has(id))add('Uklonjeno',module,label(o));
    previous[key]=clone(after);
  }
+ let diffTimer=0;
  persist=function(){
-   if(busy)return originalPersist();
-   busy=true;
-   try{
-     trimHistory();
-     for(const [module,key] of keys)compare(module,key);
-     const oldTrash=previous.trash||[],newTrash=Array.isArray(state.trash)?state.trash:[];
-     const getId=(x,i)=>String(x.trashId??x.id??x.deletedAt??'index-'+i);
-     const oldMap=new Map(oldTrash.map((x,i)=>[getId(x,i),x]));
-     const newMap=new Map(newTrash.map((x,i)=>[getId(x,i),x]));
-     for(const [id,o] of newMap)if(!oldMap.has(id))add('U koš','Koš',label(o.data||o.item||o));
-     for(const [id,o] of oldMap)if(!newMap.has(id))add('Uklonjeno iz koša','Koš',label(o.data||o.item||o));
-     previous.trash=clone(newTrash);
-     return originalPersist();
-   }finally{busy=false}
+   const result=originalPersist();
+   clearTimeout(diffTimer);
+   diffTimer=setTimeout(()=>{
+     if(busy)return;
+     busy=true;
+     try{
+       for(const [module,key] of keys)compare(module,key);
+       const oldTrash=previous.trash||[],newTrash=Array.isArray(state.trash)?state.trash:[];
+       const getId=(x,i)=>String(x.trashId??x.id??x.deletedAt??'index-'+i);
+       const oldMap=new Map(oldTrash.map((x,i)=>[getId(x,i),x]));
+       const newMap=new Map(newTrash.map((x,i)=>[getId(x,i),x]));
+       for(const [id,o] of newMap)if(!oldMap.has(id))add('U koš','Koš',label(o.data||o.item||o));
+       for(const [id,o] of oldMap)if(!newMap.has(id))add('Uklonjeno iz koša','Koš',label(o.data||o.item||o));
+       previous.trash=clone(newTrash);
+     }finally{busy=false}
+   },50);
+   return result;
  };
  const baseOther=other;
  const filter={module:'Svi',action:'Sve',member:'Svi',from:'',to:'',q:'',page:0};

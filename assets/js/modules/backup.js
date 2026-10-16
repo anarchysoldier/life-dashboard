@@ -1,8 +1,15 @@
-
-/* v1.32: ručni izvoz i povrat lokalnih podataka. Ne dira raspored kartica. */
+/* v1.32: ručni izvoz i povrat lokalnih podataka. Ne dira raspored kartica.
+   v1.33: whitelist ključeva; vraćanje više ne briše nove ključeve. */
 (function(){
  const BACKUP_VERSION=1;
- const backupKeys=()=>Object.keys(localStorage).filter(k=>k==='life-dashboard-v1-demo'||k.startsWith('life-')||k.startsWith('life_'));
+ const BACKUP_KEYS=[
+   'life-dashboard-v1-demo',
+   'life-dashboard-supabase-config-v1',
+   'life-dashboard-v127-notifications',
+   'life-dashboard-google-calendar-settings-v1',
+   'life-notes-view'
+ ];
+ const backupKeys=()=>BACKUP_KEYS.filter(k=>localStorage.getItem(k)!==null);
  const previousSettings=settings;
  settings=function(){
   const html=previousSettings();
@@ -33,18 +40,18 @@
    alert('Ovo nije podržana sigurnosna kopija Life Dashboarda.');return;
   }
   const entries=Object.entries(obj.data);
-  if(entries.some(([k,v])=>typeof k!=='string'||!(k==='life-dashboard-v1-demo'||k.startsWith('life-')||k.startsWith('life_'))||typeof v!=='string')){
-   alert('Sigurnosna kopija sadrži neispravne podatke.');return;
+  if(entries.some(([k,v])=>typeof k!=='string'||!BACKUP_KEYS.includes(k)||typeof v!=='string')){
+   alert('Sigurnosna kopija sadrži neispravne ili nepoznate ključeve.');return;
   }
   try{const main=JSON.parse(obj.data['life-dashboard-v1-demo']);if(!main||typeof main!=='object'||Array.isArray(main))throw Error('Neispravni podaci')}catch{alert('Sadržaj sigurnosne kopije nije valjan.');return}
-  if(!confirm('Vratiti podatke iz sigurnosne kopije od '+(obj.createdAt?new Date(obj.createdAt).toLocaleString('hr-HR'):'nepoznatog datuma')+'?\n\nTrenutačni podaci bit će zamijenjeni.'))return;
+  if(!confirm('Vratiti podatke iz sigurnosne kopije od '+(obj.createdAt?new Date(obj.createdAt).toLocaleString('hr-HR'):'nepoznatog datuma')+'?\n\nTrenutačni podaci bit će zamijenjeni onima iz kopije. Ključevi koji nisu u kopiji ostaju netaknuti.'))return;
   const old={};backupKeys().forEach(k=>old[k]=localStorage.getItem(k));
   try{
-   backupKeys().forEach(k=>localStorage.removeItem(k));
+   // Prepisujemo samo ključeve iz kopije; nove ključeve (npr. iz budućih verzija) ne brišemo.
    entries.forEach(([k,v])=>localStorage.setItem(k,v));
    location.reload();
   }catch(err){
-   try{backupKeys().forEach(k=>localStorage.removeItem(k));Object.entries(old).forEach(([k,v])=>localStorage.setItem(k,v))}catch{}
+   try{Object.entries(old).forEach(([k,v])=>{if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)})}catch{}
    alert('Vraćanje nije uspjelo. Prethodni podaci pokušani su vratiti. '+err.message);
   }
  },true);

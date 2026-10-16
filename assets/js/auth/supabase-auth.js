@@ -1,4 +1,3 @@
-
 /* Life Dashboard v1.35.2 — Supabase Auth gate. User data remains local in this phase. */
 (function(){
 'use strict';
@@ -13,7 +12,17 @@ let config={};try{config=JSON.parse(localStorage.getItem(CFG_KEY)||'{}')}catch{}
 config.url=SUPABASE_URL||config.url||'';
 config.key=SUPABASE_PUBLISHABLE_KEY||config.key||'';
 function message(t,ok=false){const x=el('authMessage');x.textContent=t;x.classList.toggle('ok',ok)}
-function setMode(next){mode='login';el('authTabLogin').classList.toggle('active',mode==='login');el('authTabSignup').classList.toggle('active',mode==='signup');el('authRepeatWrap').classList.toggle('auth-hidden',mode!=='signup');el('authRepeat').required=mode==='signup';el('authPassword').autocomplete=mode==='signup'?'new-password':'current-password';el('authSubmit').textContent=mode==='signup'?'Izradi račun':'Prijavi se';el('authForgot').classList.toggle('auth-hidden',mode==='signup');message('')}
+function setMode(next){
+  mode=next==='signup'?'signup':'login';
+  el('authTabLogin').classList.toggle('active',mode==='login');
+  el('authTabSignup').classList.toggle('active',mode==='signup');
+  el('authRepeatWrap').classList.toggle('auth-hidden',mode!=='signup');
+  el('authRepeat').required=mode==='signup';
+  el('authPassword').autocomplete=mode==='signup'?'new-password':'current-password';
+  el('authSubmit').textContent=mode==='signup'?'Izradi račun':'Prijavi se';
+  el('authForgot').classList.toggle('auth-hidden',mode==='signup');
+  message('');
+}
 function lock(){activeUser=null;window.lifeDashboardSignedInUserId=null;window.lifeGoogleAuthChanged?.(null);document.body.classList.add('auth-locked');gate.hidden=false;el('lifeCloudBtn')?.remove();el('lifeCloudModal')?.remove()}
 function unlock(user){window.lifeDashboardSignedInUserId=user.id;window.lifeGoogleAuthChanged?.(user.id);gate.hidden=true;document.body.classList.remove('auth-locked');addAccountButton(user);cloudButton(user);if(window.lifeRestoreGoogleConnection && !window.lifeGoogleRestoring){window.lifeGoogleRestoring=true;window.lifeRestoreGoogleConnection().finally(()=>window.lifeGoogleRestoring=false)}}
 // Sigurnosna kopija podataka po korisniku. Namjerno ručno pokretanje kako se
