@@ -1,141 +1,1376 @@
+:root{
+  /* === OSNOVNE BOJE === */
+  --bg:#f5f7fa;
+  --panel:#fff;
+  --text:#223246;
+  --muted:#8190a2;
+  --line:#e7ecf2;
+  --shadow:0 8px 28px #253d5a0a;
 
-:root{--bg:#f5f7fa;--panel:#fff;--text:#223246;--muted:#8190a2;--line:#e7ecf2;--blue:#638dd9;--green:#56ad91;--orange:#e4a661;--red:#d96771;--shadow:0 8px 28px #253d5a0a}*{box-sizing:border-box}body{margin:0;font-family:Inter,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text)}body.dark{--bg:#141b25;--panel:#202b38;--text:#eaf0f7;--muted:#a2b0c1;--line:#364253;--shadow:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.app{display:grid;grid-template-columns:226px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--panel);border-right:1px solid var(--line);padding:25px 15px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;padding:4px 10px 27px}.brand i{display:grid;place-items:center;width:34px;height:34px;background:#e8f0ff;color:#5a86d4;border-radius:12px;font-style:normal}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:var(--muted);padding:12px 13px;border-radius:11px;text-align:left;display:flex;align-items:center;gap:12px}.nav button.active,.nav button:hover{background:#edf3ff;color:#426cb9}.dark .nav button.active,.dark .nav button:hover{background:#293e5a;color:#bcd1ff}.nav .emoji{width:19px;text-align:center}.sidefoot{margin-top:32px;padding:14px 10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6}.main{min-width:0;padding:25px 30px 95px}.topbar{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-bottom:27px}.topbar h1{font-size:25px;margin:0 0 5px;letter-spacing:-.6px}.sub{color:var(--muted);font-size:13px}.topright{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.iconbtn,.smallbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:11px;padding:10px 12px}.primary{background:var(--blue);color:white;border:0;border-radius:11px;padding:11px 15px;font-weight:650}.select{border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:10px;max-width:180px}.layout{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(365px,1.35fr);gap:18px;align-items:start}.stack{display:grid;gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);padding:19px;min-width:0}.cardhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:15px}.card h3{font-size:15px;margin:0}.tiny{font-size:12px;color:var(--muted)}.pill{border-radius:100px;background:#eef3fb;color:#6881a7;padding:5px 9px;font-size:11px}.dark .pill{background:#344458;color:#c1d4e9}.calendarbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}.caldays,.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));text-align:center}.caldays{color:var(--muted);font-size:11px;margin-bottom:7px}.calgrid button{position:relative;border:0;background:transparent;color:var(--text);height:48px;border-radius:10px;font-size:12px}.calgrid button:hover,.calgrid button.selected{background:#e8f0ff;color:#4974c2}.dark .calgrid button:hover,.dark .calgrid button.selected{background:#354966;color:#c7daff}.calgrid button.out{opacity:.3}.dots{display:flex;gap:3px;justify-content:center;position:absolute;bottom:5px;left:0;right:0}.dot{height:4px;width:4px;border-radius:50%;background:var(--blue)}.dot.green{background:var(--green)}.dot.orange{background:var(--orange)}.quick{display:flex;flex-wrap:wrap;gap:8px}.quick a{background:var(--bg);padding:9px 12px;border-radius:9px;color:var(--text);text-decoration:none;font-size:12px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.stat{border-radius:13px;background:var(--bg);padding:13px}.stat strong{display:block;font-size:24px}.stat span{font-size:11px;color:var(--muted)}.item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item .info{flex:1;min-width:0}.item .name{font-size:13px;font-weight:600}.item .meta{font-size:11px;color:var(--muted);margin-top:4px}.item input[type=checkbox]{accent-color:var(--green);width:17px;height:17px}.done .name{text-decoration:line-through;color:var(--muted)}.tag{font-size:10px;border-radius:7px;padding:5px 7px;background:#edf4ff;color:#5d82c0}.tag.warn{background:#fff0ee;color:#ce6c6d}.tag.green{background:#e6f7ef;color:#4a9d78}.weather{display:flex;align-items:center;gap:15px}.weather strong{font-size:36px}.forecast{display:flex;gap:7px;overflow:auto;margin-top:14px}.forecast div{min-width:55px;text-align:center;background:var(--bg);border-radius:10px;padding:9px 5px;font-size:11px}.forecast span{display:block;font-size:20px;margin:5px}.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:16px}.search{width:100%;max-width:360px;background:var(--panel);color:var(--text);border:1px solid var(--line);padding:11px 13px;border-radius:11px}.listview{display:grid;gap:11px}.kanban{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:12px;overflow:auto}.lane{background:var(--bg);border-radius:12px;padding:12px;min-height:180px}.lane h4{margin:3px 0 13px;font-size:13px}.tile{background:var(--panel);padding:13px;border:1px solid var(--line);border-radius:10px;margin-bottom:9px;font-size:13px}.tile small{display:block;color:var(--muted);margin-top:7px}.menu{position:absolute;right:0;top:45px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:12px;padding:7px;min-width:190px;z-index:10}.menu button{display:block;border:0;background:transparent;color:var(--text);padding:11px;text-align:left;width:100%;border-radius:8px}.menu button:hover{background:var(--bg)}.relative{position:relative}.modalbg{position:fixed;inset:0;background:#1623358c;display:flex;align-items:center;justify-content:center;z-index:30;padding:15px}.modal{background:var(--panel);border-radius:19px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto}.modal h2{margin:0 0 15px;font-size:20px}.field{display:grid;gap:6px;margin-bottom:13px;font-size:12px;color:var(--muted)}.field input,.field select,.field textarea{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;width:100%}.actions{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}.notice{padding:12px;background:#eaf3ff;color:#4775b5;border-radius:10px;font-size:12px;margin-bottom:14px}.dark .notice{background:#263c56;color:#c4d9ff}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.setting{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;gap:10px}.setting:last-child{border:0}.bottomnav{display:none}.toast{position:fixed;bottom:24px;right:25px;background:#24374d;color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 10px 25px #0003;z-index:50;font-size:13px}.muted{color:var(--muted)}.minirow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.customcard{border-top:3px solid var(--blue)}.customcard iframe{width:100%;height:170px;border:1px solid var(--line);border-radius:10px}.calpage{max-width:900px}.hide{display:none!important}@media(max-width:1100px){.layout{grid-template-columns:1fr}.main{padding:20px}.sidebar{width:200px}.app{grid-template-columns:200px 1fr}}@media(max-width:720px){.app{display:block}.sidebar{display:none}.main{padding:17px 14px 95px}.topbar{align-items:flex-start}.topbar h1{font-size:21px}.topright{gap:5px}.topright .select{max-width:105px;font-size:11px}.topright .iconbtn{padding:9px}.layout{grid-template-columns:minmax(0,1fr)}.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--line);justify-content:space-around;padding:8px 4px max(9px,env(safe-area-inset-bottom));z-index:15}.bottomnav button{background:transparent;border:0;color:var(--muted);font-size:10px;display:grid;gap:4px;justify-items:center}.bottomnav b{font-size:19px}.bottomnav button.active{color:var(--blue)}.stats{gap:6px}.grid2{grid-template-columns:1fr}.kanban{grid-template-columns:repeat(3,200px)}.calgrid button{height:44px}}
+  /* === PLAVE NIJANSE (konsolidirano) === */
+  --blue:#638dd9;
+  --blue-hover:#4974c2;
+  --blue-soft:#e8f0ff;
+  --blue-soft-2:#eaf3ff;
+  --blue-text:#5d82c0;
+  --blue-navy:#223246;
+  --blue-dark-1:#293e5a;
+  --blue-dark-2:#354966;
+  --blue-dark-3:#445267;
 
-/* v1.3: kompaktno slaganje kartica bez praznih redaka */
-.dashgrid{grid-auto-rows:8px;grid-auto-flow:row dense;align-items:stretch;gap:16px}
-.dashcard{align-self:stretch;height:100%;min-height:0;cursor:default}
-.dashcard>.card{height:100%}
-.dashcard .cardhead{display:flex;align-items:center;flex-wrap:nowrap;gap:9px}
-.dashcard .cardhead h3{order:0;flex:1 1 auto;min-width:0}
-.dashcard .cardhead>.cardtools{order:10;margin-left:0;flex:0 0 auto}
-.dashcard .cardhead>.tag,.dashcard .cardhead>.pill,.dashcard .cardhead>.smallbtn{order:1}
-.dashcard .draghandle{cursor:grab}
-.calgrid button{overflow:hidden}
-.calgrid button .dots{bottom:4px;gap:3px;pointer-events:none}
-.calgrid button .dot{width:6px;height:6px;flex:none}
-.dot.task{background:#638dd9}.dot.chore{background:#56ad91}.dot.event{background:#e4a661}.dot.reminder{background:#a17bd2}
-.callegend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:13px;font-size:10px;color:var(--muted)}
-.callegend span{display:inline-flex;align-items:center;gap:4px}.callegend i{width:7px;height:7px;border-radius:50%;display:inline-block}
-@media(max-width:1450px){.dashgrid{grid-template-columns:1fr;grid-auto-flow:row}}
+  /* === SEMANTIČKE BOJE === */
+  --green:#56ad91;
+  --orange:#e4a661;
+  --red:#d96771;
+  --purple:#a17bd2;
 
-/* v1.7: uredne pločice brzih poveznica; kontrole bez utjecaja na širinu teksta */
-.quick.quickgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch;grid-auto-flow:row dense}
-.quick.quickgrid .quicktile{position:relative;grid-column:span var(--quick-span,1);display:block;min-width:0;min-height:88px;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--bg);overflow:hidden;transition:border-color .15s,box-shadow .15s}
-.quick.quickgrid .quicktile .quicktile-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%;height:100%;min-height:88px;padding:14px 8px 12px;text-decoration:none;color:var(--text);background:transparent;font-size:12px}
-.quick.quickgrid .quicktile .quicktile-icon{display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--blue) 15%,var(--panel));color:var(--blue);font-size:14px;font-weight:750}
-.quick.quickgrid .quicktile .quicktile-name{display:block;width:100%;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;word-break:normal;font-size:12px;line-height:1.4}
-.quick.quickgrid .quicktile .quicktile-actions{position:absolute;z-index:2;top:4px;right:4px;display:flex;align-items:center;gap:2px;padding:2px;border-radius:8px;background:var(--panel);box-shadow:0 2px 9px #00000010;opacity:0;visibility:hidden;transition:opacity .16s,visibility .16s}
-.quick.quickgrid .quicktile:hover .quicktile-actions,.quick.quickgrid .quicktile:focus-within .quicktile-actions{opacity:1;visibility:visible}
-.quick.quickgrid .quicktile .quickdrag,.quick.quickgrid .quicktile .quicksettings{opacity:1;visibility:visible;display:grid;place-items:center;width:23px;height:25px;min-width:23px;padding:0;color:var(--muted);border:0;background:transparent;border-radius:6px;cursor:grab;font-size:14px}
-.quick.quickgrid .quicktile .quicksettings{cursor:pointer}
-.quick.quickgrid .quicktile .quickarrow{position:absolute;right:7px;bottom:6px;margin:0;font-size:12px;opacity:0;visibility:hidden;color:var(--blue)}
-.quick.quickgrid .quicktile:hover .quickarrow,.quick.quickgrid .quicktile:focus-within .quickarrow{opacity:1;visibility:visible}
-.quick.quickgrid .quicktile.dragging{opacity:.4}
-.quick.quickgrid .quicktile:hover,.quick.quickgrid .quicktile:focus-within{border-color:var(--blue)}
-@media(hover:none){.quick.quickgrid .quicktile .quicktile-actions{opacity:1;visibility:visible}.quick.quickgrid .quicktile .quickarrow{opacity:0;visibility:hidden}}
-@media(max-width:720px){.quick.quickgrid{gap:7px}.quick.quickgrid .quicktile .quicktile-link{min-height:82px;padding:12px 4px 10px}.quick.quickgrid .quicktile .quicktile-name{font-size:11px}}
+  /* === TIPOGRAFIJA === */
+  --fs-xs:11px;
+  --fs-sm:12px;
+  --fs-md:14px;
+  --fs-lg:16px;
+  --fs-xl:22px;
+  --fs-xxl:28px;
+  --lh-tight:1.2;
+  --lh-normal:1.5;
+  --lh-loose:1.6;
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-semibold:600;
+  --fw-bold:700;
+  --fw-extrabold:800;
 
-/* v1.10 – minimalističko zaglavlje brzih poveznica, akcije samo na hover/fokus */
-.dashcard .quick-head{display:flex;align-items:center;flex-wrap:nowrap;gap:8px;min-height:28px;margin-bottom:11px}
-.dashcard .quick-head>h3{flex:1 1 auto;min-width:0;margin:0}
-.quick-head-actions{display:flex;align-items:center;gap:3px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease}
-.dashcard:hover .quick-head-actions,.dashcard:focus-within .quick-head-actions{opacity:1;visibility:visible}
-.quick-head-btn{display:inline-grid;place-items:center;width:25px;height:25px;border:0;border-radius:7px;padding:0;background:transparent;color:var(--muted);font-size:15px;line-height:1;cursor:pointer}
-.quick-head-btn:hover,.quick-head-btn:focus-visible{background:var(--bg);color:var(--text)}
-/* Ne stvaraj dodatni red za upravljačke elemente; naslov ostaje u vrhu kartice. */
-.dashcard .quick-head>.cardtools{margin-left:0;gap:2px}
-.dashcard .quick-head .draghandle,.dashcard .quick-head .tinybtn{width:25px;height:25px;font-size:15px}
-@media(hover:none){.quick-head-actions{opacity:1;visibility:visible}}
+  /* === SPACING === */
+  --sp-1:4px;
+  --sp-2:8px;
+  --sp-3:12px;
+  --sp-4:16px;
+  --sp-5:20px;
+  --sp-6:24px;
+  --sp-7:32px;
 
-/* v1.11: vracene diskretne klikabilne pill poveznice, prema referentnoj slici */
-.quick.quickgrid{gap:7px;align-items:start}
-.quick.quickgrid .quicktile{height:35px;min-height:35px;border:0;border-radius:10px;background:var(--bg);overflow:visible;box-shadow:none}
-.quick.quickgrid .quicktile:hover,.quick.quickgrid .quicktile:focus-within{background:var(--bg);border:0;box-shadow:inset 0 0 0 1px var(--line)}
-.quick.quickgrid .quicktile .quicktile-link{padding:0 12px;gap:3px;white-space:nowrap;overflow:hidden;border-radius:10px}
-.quick.quickgrid .quicktile .quicktile-name{flex:0 1 auto;font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.quick.quickgrid .quicktile .quickarrow{display:inline-block!important;flex:none;margin:0 0 0 1px;font-size:12px;color:var(--text);opacity:1!important;visibility:visible!important}
-.quick.quickgrid .quicktile .quicktile-actions{right:3px;border-radius:7px}
-.quick.quickgrid .quicktile:hover .quicktile-link,.quick.quickgrid .quicktile:focus-within .quicktile-link{padding-right:48px}
-@media(max-width:720px){.quick.quickgrid .quicktile{height:34px;min-height:34px}.quick.quickgrid .quicktile .quicktile-link{padding:0 7px}.quick.quickgrid .quicktile .quicktile-name{font-size:10px}}
-
-/* v1.16: stvarni unutarnji razmak, bez lažnog paddinga wrappera */
-.dashgrid > .dashcard { padding:7px !important; height:auto !important; }
-.dashgrid > .dashcard > .card { padding:14px 14px 22px !important; min-height:0; height:100%; }
-.dashgrid > .dashcard > .card > :last-child { margin-bottom:0 !important; }
-.dashgrid > .dashcard > .card > .callegend { margin-top:16px; }
-.dashgrid > .dashcard > .card > .forecast + .tiny { margin-top:13px; display:block; }
-@media(max-width:720px){.dashgrid > .dashcard > .card {padding-bottom:22px !important}}
+  /* === BORDER RADIUS === */
+  --r-xs:4px;
+  --r-sm:6px;
+  --r-md:9px;
+  --r-lg:12px;
+  --r-xl:16px;
+  --r-full:9999px;
+}
 
 
+/* ============================================================
+   GLOBAL RESET I OSNOVA
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
 
-.dashgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}.dashcard{position:relative;padding:7px;min-width:0;cursor:grab}.dashcard>.card{box-shadow:none;border:0;padding:14px}.cardtools{display:flex;justify-content:flex-end;gap:6px;height:24px}.tinybtn{border:0;background:transparent;color:var(--muted);cursor:pointer}.draghandle{color:var(--muted);cursor:grab}.dashcard[draggable=true]:active{opacity:.7}.dashcard .stats{grid-template-columns:repeat(3,minmax(0,1fr))}.dashcard .stat{padding:9px}.dashcard .stat strong{font-size:20px}.dashcard .stat span{font-size:10px}.dashcard .weather strong{font-size:28px}.dashcard .weather{gap:7px}.dashcard .forecast div{min-width:43px}.dashcard .forecast{gap:4px}.dashcard .item{gap:6px}.dashcard .item .name{font-size:12px}.dashcard .item .meta{font-size:10px}.dashcard .item .smallbtn{padding:5px}.dashcard .cardhead{margin-bottom:9px;min-height:28px;align-items:center;flex-wrap:wrap}.dashcard .cardhead h3{flex:1 1 auto;min-width:0}.dashcard .cardtools{height:auto;display:flex;align-items:center;gap:3px;flex:0 0 auto;margin-left:auto}.dashcard .draghandle,.dashcard .tinybtn{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:8px;font-size:16px;line-height:1}.dashcard .draghandle:hover,.dashcard .tinybtn:hover{background:var(--bg);color:var(--text)}.dashcard .draghandle{user-select:none} .dashcard .cardhead.dashcard .cardhead h3{font-size:14px}.dashcard .stats{gap:5px}.dashcard .tag{font-size:9px}@media(max-width:1450px){.dashgrid{grid-template-columns:1fr}.dashcard{grid-column:span 1!important}}@media(max-width:720px){.dashgrid{grid-template-columns:1fr}.dashcard{grid-column:span 1!important}.card{padding:14px}.topbar{flex-wrap:wrap}.topright{width:100%;justify-content:flex-end}}
+body {
+  margin: 0;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
 
-/* v1.4: jedna slobodno presloživa mreža za SVE kartice */
-.dashgrid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-rows:8px;grid-auto-flow:row dense;gap:14px!important;align-items:start}
-.dashgrid>.dashcard{grid-column:span var(--card-span,2)!important;min-width:0;align-self:start;cursor:default}
-.dashcard .draghandle{cursor:grab;touch-action:none;user-select:none;font-size:19px;line-height:1}
-.dashcard .cardhead{margin-bottom:12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.dashcard .cardhead h3{margin-right:auto;flex:1 1 auto}
-.dashcard .cardtools{margin-left:4px}
-.dashcard .calendarbar{margin-bottom:16px}
-.dashgrid .new-card-button{grid-column:1/-1!important;align-self:start;justify-self:start}
-@media(max-width:1050px){.dashgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dashgrid>.dashcard{grid-column:span min(var(--card-span,2),2)!important}}
-@media(max-width:720px){.dashgrid{grid-template-columns:minmax(0,1fr)!important}.dashgrid>.dashcard,.dashgrid .new-card-button{grid-column:1/-1!important}}
+body.dark {
+  --bg: #141b25;
+  --panel: #202b38;
+  --text: #eaf0f7;
+  --muted: #a2b0c1;
+  --line: #364253;
+  --shadow: none;
+}
 
-/* v1.5: tri unutarnja stupca za brze poveznice; visina prati sadržaj */
-.quick.quickgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:row;gap:9px;align-items:stretch}
-.quick.quickgrid .quicktile{grid-column:span var(--quick-span,1);min-width:0;display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:5px;min-height:43px}
-.quick.quickgrid .quicktile a{flex:1;min-width:0;overflow-wrap:anywhere;background:transparent;padding:7px 5px;font-size:12px}
-.quick.quickgrid .quicktile button{border:0;background:transparent;color:var(--muted);padding:5px 6px;border-radius:7px;font-size:13px}
-.quick.quickgrid .quicktile button:hover{background:var(--panel);color:var(--text)}
-.quickcontrols{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:12px}
-.quickcontrols .smallbtn{font-size:11px;padding:7px 9px}
-.quickhint{font-size:11px;color:var(--muted);margin-top:7px}
-@media(max-width:720px){.quick.quickgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.quick.quickgrid .quicktile{padding:3px}.quick.quickgrid .quicktile a{font-size:11px}}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
 
-/* v1.6: kontekstualne kontrole na hover / focus */
-.dashcard .cardtools{opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease}
-.dashcard:hover .cardtools,.dashcard:focus-within .cardtools{opacity:1;visibility:visible}
-.quick.quickgrid .quicktile{position:relative;cursor:default;transition:border-color .15s ease,box-shadow .15s ease}
-.quick.quickgrid .quicktile:hover,.quick.quickgrid .quicktile:focus-within{border-color:var(--blue)}
-.quick.quickgrid .quicktile.dragging{opacity:.45;border-style:dashed}
-.quick.quickgrid .quicktile .quickdrag{font-size:15px;cursor:grab;color:var(--muted);user-select:none;touch-action:none;flex:none;padding:4px 1px}
-.quick.quickgrid .quicktile .quickdrag:active{cursor:grabbing}
-.quick.quickgrid .quicktile .quickarrow{display:inline-block;margin-left:3px;color:var(--blue)}
-.quick.quickgrid .quicktile .quickdrag,.quick.quickgrid .quicktile .quicksettings,.quick.quickgrid .quicktile .quickarrow{opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease}
-.quick.quickgrid .quicktile:hover .quickdrag,.quick.quickgrid .quicktile:hover .quicksettings,.quick.quickgrid .quicktile:hover .quickarrow,.quick.quickgrid .quicktile:focus-within .quickdrag,.quick.quickgrid .quicktile:focus-within .quicksettings,.quick.quickgrid .quicktile:focus-within .quickarrow{opacity:1;visibility:visible}
-@media(hover:none){.dashcard .cardtools,.quick.quickgrid .quicktile .quickdrag,.quick.quickgrid .quicktile .quicksettings,.quick.quickgrid .quicktile .quickarrow{opacity:1;visibility:visible}}
+button {
+  cursor: pointer;
+}
 
-/* v1.8: suptilna akcija Prikaži sve na krajnjem desnom rubu. */
-.dashcard .cardhead:has(.view-all-link){display:flex;align-items:center;flex-wrap:nowrap;gap:10px}
-.dashcard .cardhead:has(.view-all-link)>h3{flex:1 1 auto;min-width:0;margin:0}
-.dashcard .cardhead:has(.view-all-link)>.cardtools{order:1;flex:0 0 auto;margin-left:0;gap:7px}
-.dashcard .cardhead:has(.view-all-link)>.view-all-link{order:2;flex:0 0 auto;margin-left:0}
-.view-all-link{border:0;background:transparent;color:var(--muted);padding:5px 0 5px 4px;font:inherit;font-size:11px;font-weight:500;white-space:nowrap;cursor:pointer;transition:color .15s ease}
-.view-all-link:hover,.view-all-link:focus-visible{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
-.view-all-link span{font-size:12px;margin-left:2px}
-@media(max-width:720px){.dashcard .cardhead:has(.view-all-link){gap:6px}.view-all-link{font-size:10px}}
-
-/* v1.9 – minimalističke brze poveznice: kompaktni, tanki redovi */
-.quick.quickgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;grid-auto-flow:row;align-items:start}
-.quick.quickgrid .quicktile{position:relative;display:flex;min-width:0;min-height:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:8px;background:transparent;box-shadow:none;overflow:hidden;grid-column:span var(--quick-span,1);transition:background .15s,border-color .15s}
-.quick.quickgrid .quicktile:hover,.quick.quickgrid .quicktile:focus-within{background:var(--bg);border-color:var(--line);box-shadow:none}
-.quick.quickgrid .quicktile .quicktile-link{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:7px;min-width:0;width:100%;height:100%;min-height:0;padding:0 10px;text-align:left;background:transparent;color:var(--text);font-size:11px;text-decoration:none;overflow:hidden}
-.quick.quickgrid .quicktile .quicktile-icon{display:grid;place-items:center;flex:0 0 19px;width:19px;height:19px;border-radius:5px;background:color-mix(in srgb,var(--blue) 8%,var(--panel));color:var(--muted);font-size:10px;font-weight:650}
-.quick.quickgrid .quicktile .quicktile-name{display:block;flex:1;min-width:0;width:auto;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal;overflow-wrap:normal;font-size:11px;font-weight:500;line-height:1.2}
-.quick.quickgrid .quicktile .quicktile-actions{position:absolute;top:50%;right:4px;transform:translateY(-50%);display:flex;align-items:center;gap:1px;padding:1px 2px;border-radius:6px;background:var(--panel);box-shadow:0 1px 5px #0000000d;z-index:2;opacity:0;visibility:hidden}
-.quick.quickgrid .quicktile:hover .quicktile-actions,.quick.quickgrid .quicktile:focus-within .quicktile-actions{opacity:1;visibility:visible}
-.quick.quickgrid .quicktile .quickdrag,.quick.quickgrid .quicktile .quicksettings{display:grid;place-items:center;flex:0 0 20px;width:20px;height:22px;min-width:20px;padding:0;border:0;border-radius:5px;background:transparent;color:var(--muted);font-size:12px;opacity:1;visibility:visible}
-.quick.quickgrid .quicktile .quickarrow{display:none!important}
-.quick.quickgrid .quicktile.dragging{opacity:.4}
-@media(max-width:720px){.quick.quickgrid{gap:5px}.quick.quickgrid .quicktile{min-height:36px;height:36px}.quick.quickgrid .quicktile .quicktile-link{min-height:0;padding:0 6px;gap:4px}.quick.quickgrid .quicktile .quicktile-icon{width:16px;height:16px;flex-basis:16px;font-size:9px}.quick.quickgrid .quicktile .quicktile-name{font-size:10px}}
-@media(hover:none){.quick.quickgrid .quicktile .quicktile-actions{opacity:1;visibility:visible}}
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
 
 
-/* v1.18 */ .chore-days{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}.chore-days label{display:flex;gap:4px;align-items:center;background:var(--bg);border-radius:8px;padding:7px;font-size:12px}.chore-more{border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:12px}.chore-more summary{cursor:pointer;font-size:13px;font-weight:650}.chore-more[open] summary{margin-bottom:15px}.chore-filters{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}.chore-filters label{display:flex;align-items:center;gap:7px}
+/* ============================================================
+   LAYOUT — 2 KOLONE (SIDEBAR + MAIN)
+   ============================================================ */
+.app {
+  display: grid;
+  grid-template-columns: 226px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 25px 15px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+}
+
+.main {
+  min-width: 0;
+  padding: 25px 30px 95px;
+}
 
 
-/* v1.24.1: kompaktna bočna navigacija bez okomitog klizača na uobičajenim desktop visinama */
+/* ============================================================
+   SIDEBAR — BRAND, NAVIGACIJA, FOOTER
+   ============================================================ */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: var(--fw-extrabold);
+  font-size: 20px;
+  padding: 4px 10px 27px;
+}
+
+.brand i {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  border-radius: 12px;
+  font-style: normal;
+}
+
+.nav {
+  display: grid;
+  gap: 5px;
+}
+
+.nav button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 12px 13px;
+  border-radius: 11px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav button.active,
+.nav button:hover {
+  background: var(--blue-soft);
+  color: var(--blue-hover);
+}
+
+.dark .nav button.active,
+.dark .nav button:hover {
+  background: var(--blue-dark-1);
+  color: #bcd1ff;
+}
+
+.nav .emoji {
+  width: 19px;
+  text-align: center;
+}
+
+.sidefoot {
+  margin-top: 32px;
+  padding: 14px 10px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   TOPBAR — ZAGLAVLJE STRANICE
+   ============================================================ */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.topbar h1 {
+  font-size: 25px;
+  margin: 0 0 5px;
+  letter-spacing: -.6px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.topright {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   GUMBI I KONTROLE
+   ============================================================ */
+.iconbtn,
+.smallbtn {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 11px;
+  padding: 10px 12px;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+  border: 0;
+  border-radius: 11px;
+  padding: 11px 15px;
+  font-weight: var(--fw-semibold);
+}
+
+.select {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 10px;
+  max-width: 180px;
+}
+
+
+/* ============================================================
+   LAYOUT — STACK I GRID
+   ============================================================ */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, .9fr) minmax(365px, 1.35fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.stack {
+  display: grid;
+  gap: 18px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+
+/* ============================================================
+   KARTICE
+   ============================================================ */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  box-shadow: var(--shadow);
+  padding: var(--sp-5);
+  min-width: 0;
+}
+
+.cardhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.tiny {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   PILL I TAGOVI
+   ============================================================ */
+.pill {
+  border-radius: 100px;
+  background: var(--blue-soft-2);
+  color: var(--blue-text);
+  padding: 5px 9px;
+  font-size: 11px;
+}
+
+.dark .pill {
+  background: #344458;
+  color: #c1d4e9;
+}
+
+.tag {
+  font-size: 10px;
+  border-radius: 7px;
+  padding: 5px 7px;
+  background: var(--blue-soft-2);
+  color: var(--blue-text);
+}
+
+.tag.warn {
+  background: #fff0f1;
+  color: var(--red);
+}
+
+.tag.green {
+  background: #e6f7ef;
+  color: var(--green);
+}
+
+
+/* ============================================================
+   KALENDAR — DANI I TOČKICE
+   ============================================================ */
+.calendarbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.caldays,
+.calgrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  text-align: center;
+}
+
+.caldays {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+
+.calgrid button {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  height: 48px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.calgrid button:hover,
+.calgrid button.selected {
+  background: var(--blue-soft);
+  color: var(--blue-hover);
+}
+
+.dark .calgrid button:hover,
+.dark .calgrid button.selected {
+  background: var(--blue-dark-2);
+  color: #c7daff;
+}
+
+.calgrid button.out {
+  opacity: .3;
+}
+
+.dots {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+}
+
+.dot {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.dot.green {
+  background: var(--green);
+}
+
+.dot.orange {
+  background: var(--orange);
+}
+
+
+/* ============================================================
+   BRZE POVEZNICE (stari stil)
+   ============================================================ */
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick a {
+  background: var(--bg);
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   STATISTIKA
+   ============================================================ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat {
+  border-radius: 13px;
+  background: var(--bg);
+  padding: 13px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 24px;
+}
+
+.stat span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   LISTE (ITEM)
+   ============================================================ */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.item .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item .name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.item .meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.item input[type=checkbox] {
+  accent-color: var(--green);
+  width: 17px;
+  height: 17px;
+}
+
+.done .name {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   VRIJEME (PROGNOZA)
+   ============================================================ */
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.weather strong {
+  font-size: 36px;
+}
+
+.forecast {
+  display: flex;
+  gap: 7px;
+  overflow: auto;
+  margin-top: 14px;
+}
+
+.forecast div {
+  min-width: 55px;
+  text-align: center;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 9px 5px;
+  font-size: 11px;
+}
+
+.forecast span {
+  display: block;
+  font-size: 20px;
+  margin: 5px;
+}
+
+
+/* ============================================================
+   TOOLBAR I SEARCH
+   ============================================================ */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search {
+  width: 100%;
+  max-width: 360px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 11px 13px;
+  border-radius: 11px;
+}
+
+
+/* ============================================================
+   KANBAN
+   ============================================================ */
+.listview {
+  display: grid;
+  gap: 11px;
+}
+
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px;
+  overflow: auto;
+}
+
+.lane {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 180px;
+}
+
+.lane h4 {
+  margin: 3px 0 13px;
+  font-size: 13px;
+}
+
+.tile {
+  background: var(--panel);
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 9px;
+  font-size: 13px;
+}
+
+.tile small {
+  display: block;
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+
+/* ============================================================
+   MENU (DROPDOWN)
+   ============================================================ */
+.menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  padding: 7px;
+  min-width: 190px;
+  z-index: 10;
+}
+
+.menu button {
+  display: block;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 11px;
+  text-align: left;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.menu button:hover {
+  background: var(--bg);
+}
+
+.relative {
+  position: relative;
+}
+
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modalbg {
+  position: fixed;
+  inset: 0;
+  background: #1623358c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  padding: 15px;
+}
+
+.modal {
+  background: var(--panel);
+  border-radius: 19px;
+  padding: 24px;
+  width: min(520px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.modal h2 {
+  margin: 0 0 15px;
+  font-size: 20px;
+}
+
+
+/* ============================================================
+   FORME
+   ============================================================ */
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 13px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+
+/* ============================================================
+   NOTICE
+   ============================================================ */
+.notice {
+  padding: 12px;
+  background: var(--blue-soft-2);
+  color: var(--blue-text);
+  border-radius: 10px;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.dark .notice {
+  background: #263c56;
+  color: #c4d9ff;
+}
+
+
+/* ============================================================
+   SETTING (RED U POSTAVKAMA)
+   ============================================================ */
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  gap: 10px;
+}
+
+.setting:last-child {
+  border: 0;
+}
+
+
+/* ============================================================
+   BOTTOM NAV (MOBITEL)
+   ============================================================ */
+.bottomnav {
+  display: none;
+}
+
+
+/* ============================================================
+   TOAST (OBAVIJEST)
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 25px;
+  background: #24374d;
+  color: #fff;
+  padding: 13px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px #0003;
+  z-index: 50;
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   POMOĆNE KLASE
+   ============================================================ */
+.muted {
+  color: var(--muted);
+}
+
+.minirow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customcard {
+  border-top: 3px solid var(--blue);
+}
+
+.customcard iframe {
+  width: 100%;
+  height: 170px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.calpage {
+  max-width: 900px;
+}
+
+.hide {
+  display: none !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET (ispod 1100px)
+   ============================================================ */
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .main {
+    padding: 20px;
+  }
+  .sidebar {
+    width: 200px;
+  }
+  .app {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBITEL (ispod 720px)
+   ============================================================ */
+@media (max-width: 720px) {
+  .app {
+    display: block;
+  }
+  .sidebar {
+    display: none;
+  }
+  .main {
+    padding: 17px 14px 95px;
+  }
+  .topbar {
+    align-items: flex-start;
+  }
+  .topbar h1 {
+    font-size: 21px;
+  }
+  .topright {
+    gap: 5px;
+  }
+  .topright .select {
+    max-width: 105px;
+    font-size: 11px;
+  }
+  .topright .iconbtn {
+    padding: 9px;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bottomnav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    justify-content: space-around;
+    padding: 8px 4px max(9px, env(safe-area-inset-bottom));
+    z-index: 15;
+  }
+  .bottomnav button {
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 10px;
+    display: grid;
+    gap: 4px;
+    justify-items: center;
+  }
+  .bottomnav b {
+    font-size: 19px;
+  }
+  .bottomnav button.active {
+    color: var(--blue);
+  }
+  .stats {
+    gap: 6px;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+  .kanban {
+    grid-template-columns: repeat(3, 200px);
+  }
+  .calgrid button {
+    height: 44px;
+  }
+}
+
+
+/* Quick links — akcije samo na hover/focus */
+.quick-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.dashcard:hover .quick-head-actions,
+.dashcard:focus-within .quick-head-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick-head-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 7px;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quick-head-btn:hover,
+.quick-head-btn:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+}
+
+@media (hover: none) {
+  .quick-head-actions {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Kalendar — boje točkica po tipu */
+.dot.task {
+  background: var(--blue);
+}
+
+.dot.chore {
+  background: var(--green);
+}
+
+.dot.event {
+  background: var(--orange);
+}
+
+.dot.reminder {
+  background: var(--purple);
+}
+
+.dot.google {
+  background: #4285f4;
+}
+
+/* Legenda ispod kalendara */
+.callegend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 13px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.callegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.callegend i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ============================================================
+   v1.16 — UNUTARNJI RAZMAK KARTICA
+   ============================================================ */
+.dashgrid > .dashcard {
+  padding: 7px !important;
+  height: auto !important;
+}
+
+.dashgrid > .dashcard > .card {
+  padding: var(--sp-4) var(--sp-4) var(--sp-6) !important;
+  min-height: 0;
+  height: 100%;
+}
+
+.dashgrid > .dashcard > .card > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.dashgrid > .dashcard > .card > .callegend {
+  margin-top: 16px;
+}
+
+.dashgrid > .dashcard > .card > .forecast + .tiny {
+  margin-top: 13px;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .dashgrid > .dashcard > .card {
+    padding-bottom: 22px !important;
+  }
+}
+
+
+/* ============================================================
+   v1.6 — KONTEKSTUALNE KONTROLE NA HOVER/FOCUS
+   ============================================================ */
+.dashcard .cardtools {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.dashcard:hover .cardtools,
+.dashcard:focus-within .cardtools {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick.quickgrid .quicktile {
+  position: relative;
+  cursor: default;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.quick.quickgrid .quicktile:hover,
+.quick.quickgrid .quicktile:focus-within {
+  border-color: var(--blue);
+}
+
+.quick.quickgrid .quicktile.dragging {
+  opacity: .45;
+  border-style: dashed;
+}
+
+.quick.quickgrid .quicktile .quickdrag {
+  font-size: 15px;
+  cursor: grab;
+  color: var(--muted);
+  user-select: none;
+  touch-action: none;
+  flex: none;
+  padding: 4px 1px;
+}
+
+.quick.quickgrid .quicktile .quickdrag:active {
+  cursor: grabbing;
+}
+
+.quick.quickgrid .quicktile .quickarrow {
+  display: inline-block;
+  margin-left: 3px;
+  color: var(--blue);
+}
+
+.quick.quickgrid .quicktile .quickdrag,
+.quick.quickgrid .quicktile .quicksettings,
+.quick.quickgrid .quicktile .quickarrow {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.quick.quickgrid .quicktile:hover .quickdrag,
+.quick.quickgrid .quicktile:hover .quicksettings,
+.quick.quickgrid .quicktile:hover .quickarrow,
+.quick.quickgrid .quicktile:focus-within .quickdrag,
+.quick.quickgrid .quicktile:focus-within .quicksettings,
+.quick.quickgrid .quicktile:focus-within .quickarrow {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (hover: none) {
+  .dashcard .cardtools,
+  .quick.quickgrid .quicktile .quickdrag,
+  .quick.quickgrid .quicktile .quicksettings,
+  .quick.quickgrid .quicktile .quickarrow {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* ============================================================
+   v1.8 — "PRIKAŽI SVE" LINK
+   ============================================================ */
+.dashcard .cardhead:has(.view-all-link) {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.dashcard .cardhead:has(.view-all-link) > h3 {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.dashcard .cardhead:has(.view-all-link) > .cardtools {
+  order: 1;
+  flex: 0 0 auto;
+  margin-left: 0;
+  gap: 7px;
+}
+
+.dashcard .cardhead:has(.view-all-link) > .view-all-link {
+  order: 2;
+  flex: 0 0 auto;
+  margin-left: 0;
+}
+
+.view-all-link {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 5px 0 5px 4px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .15s ease;
+}
+
+.view-all-link:hover,
+.view-all-link:focus-visible {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.view-all-link span {
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+@media (max-width: 720px) {
+  .dashcard .cardhead:has(.view-all-link) {
+    gap: 6px;
+  }
+  .view-all-link {
+    font-size: 10px;
+  }
+}
+
+
+
+/* ============================================================
+   v1.9 — KOMPAKTNI QUICK TILES
+   ============================================================ */
+.quick.quickgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  grid-auto-flow: row;
+  align-items: start;
+}
+
+.quick.quickgrid .quicktile {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+  grid-column: span var(--quick-span, 1);
+  transition: background .15s, border-color .15s;
+}
+
+.quick.quickgrid .quicktile:hover,
+.quick.quickgrid .quicktile:focus-within {
+  background: var(--bg);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.quick.quickgrid .quicktile .quicktile-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0 10px;
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  font-size: 11px;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.quick.quickgrid .quicktile .quicktile-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--blue) 8%, var(--panel));
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+}
+
+.quick.quickgrid .quicktile .quicktile-name {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+  overflow-wrap: normal;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+}
+
+.quick.quickgrid .quicktile .quicktile-actions {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px 2px;
+  border-radius: 6px;
+  background: var(--panel);
+  box-shadow: 0 1px 5px #0000000d;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.quick.quickgrid .quicktile:hover .quicktile-actions,
+.quick.quickgrid .quicktile:focus-within .quicktile-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick.quickgrid .quicktile .quickdrag,
+.quick.quickgrid .quicktile .quicksettings {
+  display: grid;
+  place-items: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 22px;
+  min-width: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick.quickgrid .quicktile .quickarrow {
+  display: none !important;
+}
+
+.quick.quickgrid .quicktile.dragging {
+  opacity: .4;
+}
+
+@media (max-width: 720px) {
+  .quick.quickgrid {
+    gap: 5px;
+  }
+  .quick.quickgrid .quicktile {
+    min-height: 36px;
+    height: 36px;
+  }
+  .quick.quickgrid .quicktile .quicktile-link {
+    min-height: 0;
+    padding: 0 6px;
+    gap: 4px;
+  }
+  .quick.quickgrid .quicktile .quicktile-icon {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+    font-size: 9px;
+  }
+  .quick.quickgrid .quicktile .quicktile-name {
+    font-size: 10px;
+  }
+}
+
+@media (hover: none) {
+  .quick.quickgrid .quicktile .quicktile-actions {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+/* ============================================================
+   v1.18 — CHORES: DANI PONAVLJANJA I FILTERI
+   ============================================================ */
+.chore-days {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+}
+
+.chore-days label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 12px;
+}
+
+.chore-more {
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.chore-more summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+}
+
+.chore-more[open] summary {
+  margin-bottom: 15px;
+}
+
+.chore-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.chore-filters label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+
+/* ============================================================
+   v1.24.1 — KOMPAKTNA SIDEBAR NAVIGACIJA
+   ============================================================ */
 @media (min-width:721px) {
   .sidebar { padding:14px 12px 10px; display:flex; flex-direction:column; overflow-y:auto; }
   .sidebar .brand { padding:3px 8px 14px; font-size:18px; line-height:1.2; flex-shrink:0; }
@@ -153,186 +1388,1600 @@
 /* Na iznimno niskim prozorima skrolanje ostaje dostupno da izbornik ne bude odrezan. */
 
 
-.dot.google{background:#4285f4}.gc-event-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
-
-
-#authGate{position:fixed;inset:0;z-index:999999;background:#f4f6f9;display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto;color:#1f2937;font-family:inherit}#authGate[hidden]{display:none!important}#authGate *{box-sizing:border-box}#authGate .auth-box{width:min(440px,100%);background:#fff;border:1px solid #e3e9f0;border-radius:20px;padding:30px;box-shadow:0 18px 65px #19283d18}#authGate .auth-brand{font-size:24px;font-weight:750;text-align:center;letter-spacing:-.6px}#authGate .auth-sub{text-align:center;color:#6b7280;font-size:13px;line-height:1.5;margin:8px 0 24px}#authGate .auth-tabs{display:flex;background:#f1f4f8;padding:4px;border-radius:11px;gap:4px;margin-bottom:20px}#authGate .auth-tabs button{flex:1;border:0;border-radius:8px;padding:10px;background:transparent;color:#566277;cursor:pointer;font-weight:600}#authGate .auth-tabs button.active{background:#fff;color:#182a40;box-shadow:0 1px 4px #0001}#authGate label{display:block;font-size:12px;font-weight:650;margin:12px 0 6px}#authGate input[type=email],#authGate input[type=password],#authGate input[type=text],#authGate input[type=url]{width:100%;border:1px solid #d9e2ed;border-radius:9px;padding:12px;background:white;color:#1f2937;font:inherit;font-size:14px}#authGate input:focus{outline:2px solid #a4baf0;outline-offset:1px}#authGate .auth-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0}#authGate .auth-row label{margin:0;font-weight:450}#authGate .auth-link{border:0;background:none;color:#4169ae;font-size:12px;cursor:pointer;padding:4px}#authGate .auth-submit{width:100%;padding:12px;border:0;border-radius:10px;background:#5e83d8;color:white;font-weight:700;cursor:pointer;margin-top:12px}#authGate button:disabled{opacity:.55;cursor:wait}#authGate .auth-error{font-size:12px;line-height:1.5;margin-top:12px;min-height:16px;color:#b33443;white-space:pre-wrap}#authGate .auth-error.ok{color:#23784d}#authGate details{margin-top:22px;border-top:1px solid #edf0f4;padding-top:16px;font-size:12px;color:#687486}#authGate summary{cursor:pointer}#authGate .auth-help{font-size:11px;color:#7a8493;line-height:1.5;margin-top:9px}#authGate .auth-pw{display:flex;align-items:center;gap:6px}#authGate .auth-pw input{flex:1;min-width:0}#authGate .auth-pw button{border:1px solid #d9e2ed;background:white;padding:11px;border-radius:9px;cursor:pointer;color:#4b5563}#authGate .auth-hidden{display:none!important}body.auth-locked{overflow:hidden!important}body.auth-locked>.app,body.auth-locked>.bottomnav{visibility:hidden!important}.auth-top-btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 11px;border-radius:9px;cursor:pointer;font-size:12px;white-space:nowrap}body.dark #authGate{background:#101826;color:#e8eef7}body.dark #authGate .auth-box{background:#1c2635;border-color:#344255}body.dark #authGate input{background:#111c2a;color:#f4f6fa;border-color:#445267}body.dark #authGate .auth-tabs{background:#111c2a}body.dark #authGate .auth-tabs button.active{background:#35445b;color:#fff}body.dark #authGate .auth-pw button{background:#111c2a;color:#fff;border-color:#445267}
-
-
-
-/* v1.17 – funkcionalni Tasks, bez izmjena postojeceg rasporeda */
-.task-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.task-filters select{max-width:210px}
-.task-detail{font-size:11px;color:var(--muted);margin-top:5px}.task-desc{font-size:12px;line-height:1.5;margin-top:5px;white-space:pre-wrap}.task-priority-high{color:var(--red)}
-
-
-
-/* v1.19 — Shopping */
-.shop-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:0 0 15px}
-.shop-toolbar .search{flex:1;min-width:170px}
-.shop-summary{font-size:12px;color:var(--muted);margin:0 0 13px}
-.shop-section{margin-bottom:14px}
-.shop-section h3{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.shop-item{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}
-.shop-item:last-child{border-bottom:0}
-.shop-item input[type=checkbox]{accent-color:var(--green);width:18px;height:18px;flex:none}
-.shop-item .shop-info{flex:1;min-width:0}
-.shop-item .shop-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}
-.shop-item .shop-meta{font-size:11px;color:var(--muted);margin-top:4px}
-.shop-item.bought .shop-name{text-decoration:line-through;color:var(--muted)}
-.shop-item .shop-actions{display:flex;gap:4px}
-.shop-empty{color:var(--muted);font-size:13px;padding:16px 0}
-.shop-history-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}
-.shop-history-row:last-child{border:0}
-.shop-history-row small{display:block;color:var(--muted);margin-top:4px}
-.shop-chip{font-size:10px;padding:4px 8px;background:var(--bg);border-radius:20px;color:var(--muted)}
-@media(max-width:720px){.shop-item{gap:7px}.shop-item .smallbtn{padding:7px}}
-
-
-
-/* v1.20 — kalendar i pregled dana */
-.cal-v120{max-width:980px}.cal-v120 .cal-filterbar{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 14px}.cal-filterbar label{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:var(--muted)}.cal-v120 .day-panel{margin-top:15px}.day-panel .day-entry{display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);padding:11px 0}.day-panel .day-entry:last-child{border:0}.day-entry .info{flex:1;min-width:0}.day-entry .meta{font-size:11px;color:var(--muted);margin-top:4px}.cal-v120 .calgrid button{cursor:pointer}.cal-v120 .calgrid button.today{outline:1px solid var(--blue);outline-offset:-2px}.cal-v120 .calgrid button.selected{background:#e8f0ff}.dark .cal-v120 .calgrid button.selected{background:#354966}.cal-v120 .callegend{margin-top:15px}.cal-v120 .day-entry.done .name{text-decoration:line-through;color:var(--muted)}
-
-
-
-/* v1.21: postavke završetka ponavljanja i obrasci događaja/podsjetnika */
-.repeat-end-panel{background:var(--bg);border-radius:11px;padding:12px;margin:0 0 13px}.repeat-end-panel .field{margin-bottom:8px}.repeat-end-panel .grid2{align-items:end}.repeat-end-panel .tiny{line-height:1.5}
-
-
-
-/* v1.22 — Notes */
-.notes-toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:15px}.notes-toolbar .search{flex:1;min-width:180px}.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:13px}.notes-card{cursor:pointer;min-height:145px}.notes-card:hover{border-color:var(--blue)}.notes-card h3{margin-bottom:10px}.notes-preview{color:var(--muted);font-size:12px;line-height:1.55;max-height:85px;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere}.notes-meta{font-size:11px;color:var(--muted);margin-top:12px}.notes-label{display:inline-block;background:var(--bg);border-radius:6px;padding:4px 7px;margin:4px 4px 0 0;font-size:10px}.notes-row{display:flex;align-items:center;gap:12px;cursor:pointer}.notes-row .info{flex:1;min-width:0}.notes-editor-toolbar{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.notes-editor-toolbar button{padding:7px 10px}.notes-editor{min-height:190px;max-height:38vh;overflow:auto;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:13px;outline:none;font-size:13px;line-height:1.6;color:var(--text)}.notes-editor:focus{border-color:var(--blue)}.notes-editor h2{font-size:18px}.notes-editor h3{font-size:15px}.notes-editor a{color:var(--blue)}.notes-save-status{font-size:11px;color:var(--muted)}
-
-
-
-.v123-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:15px 0 22px}.v123-metric{background:var(--bg);border:1px solid var(--line);padding:16px;border-radius:13px}.v123-metric strong{display:block;font-size:27px;margin:6px 0}.v123-metric span{font-size:12px;color:var(--muted)}.v123-bar{display:flex;align-items:center;gap:10px;margin:12px 0}.v123-bar>span{min-width:110px;font-size:12px}.v123-bar-track{flex:1;height:11px;background:var(--bg);border-radius:9px;overflow:hidden}.v123-bar-fill{height:100%;background:var(--blue);border-radius:9px}.v123-filter{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.v123-filter select,.v123-filter input{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px;max-width:100%}.v123-log{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}.v123-log:last-child{border:0}.v123-log .info{flex:1;min-width:0}.v123-log .name{font-size:13px;font-weight:600}.v123-log .meta{font-size:11px;color:var(--muted);margin-top:5px}
-
-
-
-/* v1.25 global search */
-.v125-searchbtn{position:fixed;right:22px;bottom:22px;z-index:14;box-shadow:0 7px 22px #152c4b22}
-.v125-shade{position:fixed;inset:0;background:#101e2b99;z-index:110;display:flex;align-items:flex-start;justify-content:center;padding: min(12vh,95px) 16px 20px}
-.v125-dialog{width:min(690px,100%);background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:0 25px 70px #0003;overflow:hidden;max-height:80vh;display:flex;flex-direction:column}
-.v125-top{display:flex;gap:10px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
-.v125-top input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:16px}
-.v125-results{overflow:auto;padding:10px}
-.v125-result{width:100%;border:0;background:transparent;color:var(--text);display:flex;flex-direction:column;gap:5px;text-align:left;padding:12px;border-radius:10px}
-.v125-result:hover,.v125-result:focus{background:var(--bg);outline:1px solid var(--line)}
-.v125-result small{color:var(--muted);font-size:12px}
-.v125-footer{padding:11px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-@media(max-width:720px){.v125-searchbtn{bottom:79px;right:14px}.v125-shade{padding-top:30px}.v125-dialog{max-height:85vh}}
-
-
-
-.v126-star{border:1px solid var(--border,#d9e0e9);border-radius:10px;background:transparent;color:#8994a7;font-size:19px;min-width:34px;min-height:32px;cursor:pointer;flex-shrink:0}
-.v126-star.active{color:#d49a22;background:rgba(238,183,58,.12);border-color:rgba(212,154,34,.4)}
-.v126-fav{display:flex;gap:12px;align-items:center;padding:13px 4px;border-bottom:1px solid rgba(130,150,170,.17)}
-.v126-fav .info{flex:1;min-width:0}.v126-fav .name{font-weight:650}.v126-fav .meta{font-size:12px;opacity:.7;margin-top:3px}
-.v126-fav-actions{display:flex;align-items:center;gap:7px}.v126-favlist{max-width:900px}
-
-
-
-/* v1.26.1: diskretne akcije u retku */
-#content .item,#content .tile,#content .notes-card,#content .notes-row{position:relative}
-#content .v126-star{border:0;background:transparent;border-radius:7px;min-width:27px;min-height:27px;padding:2px;font-size:18px;opacity:0;transition:opacity .12s}
-#content .item:hover .v126-star,#content .tile:hover .v126-star,#content .notes-card:hover .v126-star,#content .notes-row:hover .v126-star,#content .v126-star:focus-visible,#content .item:focus-within .v126-star,#content .tile:focus-within .v126-star{opacity:1}
-#content .v126-star.active{color:#d49a22;background:transparent}
-#content .v126-star:hover{background:var(--bg)}
-#content .v126-star.v127-placed{order:0}
-.v125-top #v127ClearSearch{border:0;background:transparent;color:var(--muted);font-size:18px;cursor:pointer;padding:5px 8px;border-radius:7px}
-.v125-top #v127ClearSearch:hover{background:var(--bg);color:var(--text)}
-.v125-top #v127ClearSearch[hidden]{display:none}
-@media(hover:none){#content .v126-star{opacity:1}}
-
-
-
-.v127-alert{display:flex;gap:10px;align-items:flex-start;padding:12px 8px;border-bottom:1px solid var(--border,#ddd)}
-.v127-alert.unread{font-weight:600}.v127-alert .smallbtn{margin-left:auto;flex-shrink:0}
-.v127-pill{font-size:11px;color:var(--muted);font-weight:400}
-#notifCount:empty{display:none}
-
-
-
-/* v1.27.5: diskretni panel obavijesti bez pozadinskog zatamnjenja */
-#v127Panel{position:fixed;z-index:100000;box-sizing:border-box;background:var(--card,#fff);color:var(--text,#243044);border:1px solid var(--border,#e2e8f0);border-radius:13px;box-shadow:0 12px 35px rgba(16,30,50,.15);overflow:hidden;font-size:13px}
-.v127p-head{display:flex;align-items:center;gap:9px;padding:13px 14px;border-bottom:1px solid var(--border,#eee)}
-.v127p-head strong{font-size:14px}.v127p-count{font-size:11px;color:var(--muted);margin-left:auto}
-.v127p-icon{border:0;background:transparent;color:var(--muted);cursor:pointer;border-radius:7px;padding:3px 7px;font-size:16px;flex-shrink:0}
-.v127p-icon:hover,.v127p-footer button:hover{background:var(--bg,#f4f6fa)}
-.v127p-list{max-height:min(320px,45vh);overflow-y:auto}.v127p-entry{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-bottom:1px solid var(--border,#eee)}
-.v127p-dot{width:6px;height:6px;border-radius:50%;background:transparent;flex-shrink:0;margin-top:7px}.v127p-unread .v127p-dot{background:#6489cc}
-.v127p-copy{min-width:0;flex:1}.v127p-title{font-weight:500;line-height:1.4;overflow-wrap:anywhere}.v127p-meta{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
-.v127p-empty{padding:22px 12px;text-align:center;color:var(--muted)}
-.v127p-footer{display:flex;align-items:center;gap:4px;padding:8px 10px}.v127p-footer button{border:0;background:transparent;color:var(--muted);cursor:pointer;border-radius:6px;padding:7px 6px;font-size:11px}.v127p-footer .v127p-icon{margin-left:auto;font-size:16px}
-
-
-
-/* v1.28: diskretna oznaka propuštenih termina */
-.v128-late{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#ae642c;background:rgba(220,143,62,.10);padding:3px 7px;border-radius:7px;margin-top:5px}
-.v128-pause{display:inline-flex;font-size:10px;color:var(--muted);margin-top:5px}
-
-
-
-.header-clock{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;white-space:nowrap;line-height:1.1;margin-right:3px;color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
-.header-clock strong{font-size:15px;font-weight:650;color:var(--text);letter-spacing:.2px}
-@media(max-width:560px){.header-clock{font-size:10px;margin-right:0}.header-clock strong{font-size:13px}}
-
-
-
-.v129-tools{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}.v129-tools input,.v129-tools select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px;min-width:0}.v129-tools input[type=search]{flex:1 1 180px}.v129-tools label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}.v129-count{font-size:12px;color:var(--muted);margin:10px 0}.v129-page{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}.v129-page button{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--panel);color:var(--text);cursor:pointer}.v129-page button:disabled{opacity:.35;cursor:default}.v129-event{padding:12px 0;border-bottom:1px solid var(--line)}.v129-event:last-child{border:0}.v129-event-title{font-size:13px;font-weight:600}.v129-event-meta{font-size:11px;color:var(--muted);margin-top:4px}
-
-
-
-.v130-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px}.v130-toolbar select{border:1px solid var(--line,#e1e8f2);border-radius:10px;padding:9px 12px;background:var(--card,#fff);color:inherit}.v130-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 22px}.v130-stat{border:1px solid var(--line,#e4eaf2);border-radius:13px;padding:15px;background:rgba(128,150,180,.045)}.v130-stat small{display:block;color:var(--muted,#7285a0);font-size:12px}.v130-stat strong{font-size:27px;display:block;margin-top:7px}.v130-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}.v130-panel{border:1px solid var(--line,#e4eaf2);border-radius:13px;padding:17px;min-width:0}.v130-panel h4{margin:0 0 14px}.v130-chart{display:flex;align-items:end;gap:8px;height:155px;border-bottom:1px solid var(--line,#e4eaf2);padding-top:12px}.v130-col{flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:5px;height:100%;min-width:0}.v130-bar{width:min(100%,38px);min-height:3px;border-radius:5px 5px 0 0;background:#668ce5}.v130-col small{font-size:10px;color:var(--muted,#7285a0);white-space:nowrap}.v130-legend{font-size:12px;color:var(--muted,#7285a0);margin-top:13px}.v130-member{display:grid;grid-template-columns:minmax(85px,1fr) 2fr 30px;gap:9px;align-items:center;font-size:12px;margin:12px 0}.v130-track{height:8px;background:rgba(128,150,180,.15);border-radius:12px;overflow:hidden}.v130-fill{height:100%;background:#61b6a1;border-radius:12px}@media(max-width:720px){.v130-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v130-panels{grid-template-columns:1fr}}
-
-
-
-/* v1.31: proširenja samo na stranici kalendara; dashboard masonry ostaje netaknut */
-.cal31-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px}
-.cal31-tools .cal31-jump{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.cal31-tools input[type=date]{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--card);color:var(--text);font:inherit;max-width:170px}
-.cal31-count{font-size:12px;color:var(--muted)}
-.cal31-daynav{display:flex;align-items:center;gap:6px}
-.cal31-entry{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.cal31-entry:last-child{border-bottom:0}
-.cal31-time{min-width:55px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
-.cal31-entry .info{flex:1;min-width:0}
-.cal31-entry .name{overflow-wrap:anywhere}
-.cal31-badge{font-size:11px;color:var(--muted)}
-@media(max-width:580px){.cal31-tools{align-items:flex-start}.cal31-entry{gap:7px}.cal31-time{min-width:42px}}
-
-
-
-/* Tasks: diskretno brisanje pretrage */
-.v1313-searchwrap{position:relative;display:inline-flex;align-items:center;flex:1 1 190px;min-width:0;max-width:360px}
-.v1313-searchwrap .search{width:100%;padding-right:34px;min-width:0}
-.v1313-clear{position:absolute;right:7px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font-size:19px;line-height:1;cursor:pointer;padding:3px 6px;border-radius:6px}
-.v1313-clear:hover{background:var(--bg);color:var(--text)}
-.v1313-clear[hidden]{display:none}
-
-
-
-/* Privremeni pregled položaja pri povlačenju; zadržava postojeći plutajući grid. */
-#dashgrid .dashcard.drag-preview-active{opacity:.42;outline:2px dashed var(--muted);outline-offset:-4px;transition:opacity .12s ease}
-#dashgrid .dashcard{transition:transform .13s ease}
-@media(prefers-reduced-motion:reduce){#dashgrid .dashcard{transition:none}}
-
-
-
-/* v1.31.6: Sidrenje povlačenjem miša; bez izbornika za položaj. */
-/* v1.31.5: Neovisno lijevo/desno sidrenje, bez prisilnog poravnanja visina. */
-@media(min-width:1051px){
- #dashgrid>.dashcard[data-side="left"],#dashgrid>.dashcard[data-side="right"]{grid-column-start:var(--card-side)!important;grid-column-end:span var(--card-span,2)!important}
+/* ============================================================
+   GOOGLE CALENDAR — TOČKA I EVENT
+   ============================================================ */
+.dot.google {
+  background: #4285f4;
 }
-@media(min-width:721px) and (max-width:1050px){
- #dashgrid>.dashcard[data-side="left"]{grid-column:1/span min(var(--card-span,2),2)!important}
- #dashgrid>.dashcard[data-side="right"]{grid-column:calc(3 - min(var(--card-span,2),2))/span min(var(--card-span,2),2)!important}
+
+.gc-event-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 7px;
 }
 
 
-/* v1.31.7: gumb za novu karticu izvan plutajuće mreže, uvijek nakon kartica */
-.dashboard-add-card-row{display:flex;justify-content:flex-start;margin-top:16px;margin-bottom:10px}
-.dashboard-add-card-row .new-card-button{position:static;flex:none}
+/* ============================================================
+   LOGIN FORMA (AUTH GATE)
+   ============================================================ */
+#authGate {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #f4f6f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  color: #1f2937;
+  font-family: inherit;
+}
 
+#authGate[hidden] {
+  display: none !important;
+}
+
+#authGate * {
+  box-sizing: border-box;
+}
+
+#authGate .auth-box {
+  width: min(440px, 100%);
+  background: #fff;
+  border: 1px solid #e3e9f0;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 18px 65px #19283d18;
+}
+
+#authGate .auth-brand {
+  font-size: 24px;
+  font-weight: var(--fw-bold);
+  text-align: center;
+  letter-spacing: -.6px;
+}
+
+#authGate .auth-sub {
+  text-align: center;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 8px 0 24px;
+}
+
+#authGate .auth-tabs {
+  display: flex;
+  background: #f1f4f8;
+  padding: 4px;
+  border-radius: 11px;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+#authGate .auth-tabs button {
+  flex: 1;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px;
+  background: transparent;
+  color: #566277;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#authGate .auth-tabs button.active {
+  background: #fff;
+  color: #182a40;
+  box-shadow: 0 1px 4px #0001;
+}
+
+#authGate label {
+  display: block;
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  margin: 12px 0 6px;
+}
+
+#authGate input[type=email],
+#authGate input[type=password],
+#authGate input[type=text],
+#authGate input[type=url] {
+  width: 100%;
+  border: 1px solid #d9e2ed;
+  border-radius: 9px;
+  padding: 12px;
+  background: white;
+  color: #1f2937;
+  font: inherit;
+  font-size: 14px;
+}
+
+#authGate input:focus {
+  outline: 2px solid #a4baf0;
+  outline-offset: 1px;
+}
+
+#authGate .auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+#authGate .auth-row label {
+  margin: 0;
+  font-weight: var(--fw-regular);
+}
+
+#authGate .auth-link {
+  border: 0;
+  background: none;
+  color: var(--blue-hover);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+#authGate .auth-submit {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+#authGate button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+#authGate .auth-error {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 12px;
+  min-height: 16px;
+  color: var(--red);
+  white-space: pre-wrap;
+}
+
+#authGate .auth-error.ok {
+  color: var(--green);
+}
+
+#authGate details {
+  margin-top: 22px;
+  border-top: 1px solid #edf0f4;
+  padding-top: 16px;
+  font-size: 12px;
+  color: #687486;
+}
+
+#authGate summary {
+  cursor: pointer;
+}
+
+#authGate .auth-help {
+  font-size: 11px;
+  color: #7a8493;
+  line-height: 1.5;
+  margin-top: 9px;
+}
+
+#authGate .auth-pw {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#authGate .auth-pw input {
+  flex: 1;
+  min-width: 0;
+}
+
+#authGate .auth-pw button {
+  border: 1px solid #d9e2ed;
+  background: white;
+  padding: 11px;
+  border-radius: 9px;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+#authGate .auth-hidden {
+  display: none !important;
+}
+
+
+/* === ZAKLJUČAN BODY === */
+body.auth-locked {
+  overflow: hidden !important;
+}
+
+body.auth-locked > .app,
+body.auth-locked > .bottomnav {
+  visibility: hidden !important;
+}
+
+
+/* === TOP BAR GUMBI ZA AUTH === */
+.auth-top-btn {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 11px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+
+/* === DARK MODE === */
+body.dark #authGate {
+  background: #101826;
+  color: #e8eef7;
+}
+
+body.dark #authGate .auth-box {
+  background: #1c2635;
+  border-color: #344255;
+}
+
+body.dark #authGate input {
+  background: #111c2a;
+  color: #f4f6fa;
+  border-color: var(--blue-dark-3);
+}
+
+body.dark #authGate .auth-tabs {
+  background: #111c2a;
+}
+
+body.dark #authGate .auth-tabs button.active {
+  background: #35445b;
+  color: #fff;
+}
+
+body.dark #authGate .auth-pw button {
+  background: #111c2a;
+  color: #fff;
+  border-color: var(--blue-dark-3);
+}
+
+
+
+/* ============================================================
+   v1.17 — TASKS: FILTERI I DETAIL
+   ============================================================ */
+.task-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.task-filters select {
+  max-width: 210px;
+}
+
+.task-detail {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.task-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 5px;
+  white-space: pre-wrap;
+}
+
+.task-priority-high {
+  color: var(--red);
+}
+
+
+/* ============================================================
+   v1.19 — SHOPPING
+   ============================================================ */
+.shop-toolbar {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 15px;
+}
+
+.shop-toolbar .search {
+  flex: 1;
+  min-width: 170px;
+}
+
+.shop-summary {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 13px;
+}
+
+.shop-section {
+  margin-bottom: 14px;
+}
+
+.shop-section h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.shop-item:last-child {
+  border-bottom: 0;
+}
+
+.shop-item input[type=checkbox] {
+  accent-color: var(--green);
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.shop-item .shop-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-item .shop-name {
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.shop-item .shop-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.shop-item.bought .shop-name {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.shop-item .shop-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.shop-empty {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 16px 0;
+}
+
+.shop-history-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.shop-history-row:last-child {
+  border: 0;
+}
+
+.shop-history-row small {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.shop-chip {
+  font-size: 10px;
+  padding: 4px 8px;
+  background: var(--bg);
+  border-radius: 20px;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .shop-item {
+    gap: 7px;
+  }
+  .shop-item .smallbtn {
+    padding: 7px;
+  }
+}
+
+
+/* ============================================================
+   v1.20 — KALENDAR I PREGLED DANA
+   ============================================================ */
+.cal-v120 {
+  max-width: 980px;
+}
+
+.cal-v120 .cal-filterbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+}
+
+.cal-filterbar label {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cal-v120 .day-panel {
+  margin-top: 15px;
+}
+
+.day-panel .day-entry {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 0;
+}
+
+.day-panel .day-entry:last-child {
+  border: 0;
+}
+
+.day-entry .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.day-entry .meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.cal-v120 .calgrid button {
+  cursor: pointer;
+}
+
+.cal-v120 .calgrid button.today {
+  outline: 1px solid var(--blue);
+  outline-offset: -2px;
+}
+
+.cal-v120 .calgrid button.selected {
+  background: var(--blue-soft);
+}
+
+.dark .cal-v120 .calgrid button.selected {
+  background: var(--blue-dark-2);
+}
+
+.cal-v120 .callegend {
+  margin-top: 15px;
+}
+
+.cal-v120 .day-entry.done .name {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   v1.21 — ZAVRŠETAK PONAVLJANJA
+   ============================================================ */
+.repeat-end-panel {
+  background: var(--bg);
+  border-radius: 11px;
+  padding: 12px;
+  margin: 0 0 13px;
+}
+
+.repeat-end-panel .field {
+  margin-bottom: 8px;
+}
+
+.repeat-end-panel .grid2 {
+  align-items: end;
+}
+
+.repeat-end-panel .tiny {
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   v1.22 — NOTES
+   ============================================================ */
+.notes-toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.notes-toolbar .search {
+  flex: 1;
+  min-width: 180px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 13px;
+}
+
+.notes-card {
+  cursor: pointer;
+  min-height: 145px;
+}
+
+.notes-card:hover {
+  border-color: var(--blue);
+}
+
+.notes-card h3 {
+  margin-bottom: 10px;
+}
+
+.notes-preview {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+  max-height: 85px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.notes-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+.notes-label {
+  display: inline-block;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 4px 7px;
+  margin: 4px 4px 0 0;
+  font-size: 10px;
+}
+
+.notes-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.notes-row .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.notes-editor-toolbar {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.notes-editor-toolbar button {
+  padding: 7px 10px;
+}
+
+.notes-editor {
+  min-height: 190px;
+  max-height: 38vh;
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 13px;
+  outline: none;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.notes-editor:focus {
+  border-color: var(--blue);
+}
+
+.notes-editor h2 {
+  font-size: 18px;
+}
+
+.notes-editor h3 {
+  font-size: 15px;
+}
+
+.notes-editor a {
+  color: var(--blue);
+}
+
+.notes-save-status {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+
+/* ============================================================
+   v123 — STATISTIKA (METRIKE, BAR-OVI, DNEVNIK)
+   ============================================================ */
+.v123-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 12px;
+  margin: 15px 0 22px;
+}
+
+.v123-metric {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 16px;
+  border-radius: 13px;
+}
+
+.v123-metric strong {
+  display: block;
+  font-size: 27px;
+  margin: 6px 0;
+}
+
+.v123-metric span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.v123-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.v123-bar > span {
+  min-width: 110px;
+  font-size: 12px;
+}
+
+.v123-bar-track {
+  flex: 1;
+  height: 11px;
+  background: var(--bg);
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.v123-bar-fill {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 9px;
+}
+
+.v123-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 14px 0;
+}
+
+.v123-filter select,
+.v123-filter input {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px;
+  max-width: 100%;
+}
+
+.v123-log {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.v123-log:last-child {
+  border: 0;
+}
+
+.v123-log .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.v123-log .name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.v123-log .meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+
+
+/* ============================================================
+   v1.25 — GLOBALNA PRETRAGA (CTRL+K)
+   ============================================================ */
+.v125-searchbtn {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 14;
+  box-shadow: 0 7px 22px #152c4b22;
+}
+
+.v125-shade {
+  position: fixed;
+  inset: 0;
+  background: #101e2b99;
+  z-index: 110;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: min(12vh, 95px) 16px 20px;
+}
+
+.v125-dialog {
+  width: min(690px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  box-shadow: 0 25px 70px #0003;
+  overflow: hidden;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.v125-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.v125-top input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.v125-results {
+  overflow: auto;
+  padding: 10px;
+}
+
+.v125-result {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.v125-result:hover,
+.v125-result:focus {
+  background: var(--bg);
+  outline: 1px solid var(--line);
+}
+
+.v125-result small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.v125-footer {
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* === RESPONSIVE === */
+@media (max-width: 720px) {
+  .v125-searchbtn {
+    bottom: 79px;
+    right: 14px;
+  }
+  .v125-shade {
+    padding-top: 30px;
+  }
+  .v125-dialog {
+    max-height: 85vh;
+  }
+}
+
+
+
+/* ============================================================
+   v1.26 — FAVORITI (ZVEZDICA)
+   ============================================================ */
+.v126-star {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: #8994a7;
+  font-size: 19px;
+  min-width: 34px;
+  min-height: 32px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.v126-star.active {
+  color: #d49a22;
+  background: rgba(238, 183, 58, .12);
+  border-color: rgba(212, 154, 34, .4);
+}
+
+.v126-fav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 4px;
+  border-bottom: 1px solid rgba(130, 150, 170, .17);
+}
+
+.v126-fav .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.v126-fav .name {
+  font-weight: var(--fw-semibold);
+}
+
+.v126-fav .meta {
+  font-size: 12px;
+  opacity: .7;
+  margin-top: 3px;
+}
+
+.v126-fav-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.v126-favlist {
+  max-width: 900px;
+}
+
+
+/* ============================================================
+   v1.26.1 — DISKRETNE AKCIJE U RETKU
+   ============================================================ */
+#content .item,
+#content .tile,
+#content .notes-card,
+#content .notes-row {
+  position: relative;
+}
+
+#content .v126-star {
+  border: 0;
+  background: transparent;
+  border-radius: 7px;
+  min-width: 27px;
+  min-height: 27px;
+  padding: 2px;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity .12s;
+}
+
+#content .item:hover .v126-star,
+#content .tile:hover .v126-star,
+#content .notes-card:hover .v126-star,
+#content .notes-row:hover .v126-star,
+#content .v126-star:focus-visible,
+#content .item:focus-within .v126-star,
+#content .tile:focus-within .v126-star {
+  opacity: 1;
+}
+
+#content .v126-star.active {
+  color: #d49a22;
+  background: transparent;
+}
+
+#content .v126-star:hover {
+  background: var(--bg);
+}
+
+#content .v126-star.v127-placed {
+  order: 0;
+}
+
+.v125-top #v127ClearSearch {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 7px;
+}
+
+.v125-top #v127ClearSearch:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.v125-top #v127ClearSearch[hidden] {
+  display: none;
+}
+
+@media (hover: none) {
+  #content .v126-star {
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   v1.27 — ALERT U PANELU OBAVIJESTI
+   ============================================================ */
+.v127-alert {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.v127-alert.unread {
+  font-weight: 600;
+}
+
+.v127-alert .smallbtn {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.v127-pill {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+#notifCount:empty {
+  display: none;
+}
+
+
+
+/* ============================================================
+   v1.27.5 — PANEL OBAVIJESTI (BEZ ZATAMNJENJA)
+   ============================================================ */
+#v127Panel {
+  position: fixed;
+  z-index: 100000;
+  box-sizing: border-box;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 12px 35px rgba(16, 30, 50, .15);
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.v127p-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.v127p-head strong {
+  font-size: 14px;
+}
+
+.v127p-count {
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.v127p-icon {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 3px 7px;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.v127p-icon:hover,
+.v127p-footer button:hover {
+  background: var(--bg);
+}
+
+.v127p-list {
+  max-height: min(320px, 45vh);
+  overflow-y: auto;
+}
+
+.v127p-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+.v127p-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.v127p-unread .v127p-dot {
+  background: var(--blue);
+}
+
+.v127p-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.v127p-title {
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.v127p-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.v127p-empty {
+  padding: 22px 12px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.v127p-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+}
+
+.v127p-footer button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 7px 6px;
+  font-size: 11px;
+}
+
+.v127p-footer .v127p-icon {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+
+/* ============================================================
+   v1.28 — OZNAKA PROPUŠTENIH TERMINA
+   ============================================================ */
+.v128-late {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #ae642c;
+  background: rgba(220, 143, 62, .10);
+  padding: 3px 7px;
+  border-radius: 7px;
+  margin-top: 5px;
+}
+
+.v128-pause {
+  display: inline-flex;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+
+/* ============================================================
+   HEADER CLOCK — SAT U ZAGLAVLJU
+   ============================================================ */
+.header-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  white-space: nowrap;
+  line-height: 1.1;
+  margin-right: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.header-clock strong {
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  letter-spacing: .2px;
+}
+
+@media (max-width: 560px) {
+  .header-clock {
+    font-size: 10px;
+    margin-right: 0;
+  }
+  .header-clock strong {
+    font-size: 13px;
+  }
+}
+
+
+
+/* ============================================================
+   v1.29 — DNEVNIK AKTIVNOSTI
+   ============================================================ */
+.v129-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 14px 0;
+}
+
+.v129-tools input,
+.v129-tools select {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px;
+  min-width: 0;
+}
+
+.v129-tools input[type=search] {
+  flex: 1 1 180px;
+}
+
+.v129-tools label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.v129-count {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 10px 0;
+}
+
+.v129-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.v129-page button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.v129-page button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.v129-event {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.v129-event:last-child {
+  border: 0;
+}
+
+.v129-event-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.v129-event-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+
+/* ============================================================
+   v1.30 — STATISTIKA
+   ============================================================ */
+.v130-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.v130-toolbar select {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: var(--panel);
+  color: inherit;
+}
+
+.v130-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0 22px;
+}
+
+.v130-stat {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 15px;
+  background: rgba(128, 150, 180, .045);
+}
+
+.v130-stat small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.v130-stat strong {
+  font-size: 27px;
+  display: block;
+  margin-top: 7px;
+}
+
+.v130-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.v130-panel {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 17px;
+  min-width: 0;
+}
+
+.v130-panel h4 {
+  margin: 0 0 14px;
+}
+
+.v130-chart {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  height: 155px;
+  border-bottom: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.v130-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  min-width: 0;
+}
+
+.v130-bar {
+  width: min(100%, 38px);
+  min-height: 3px;
+  border-radius: 5px 5px 0 0;
+  background: var(--blue);
+}
+
+.v130-col small {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.v130-legend {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 13px;
+}
+
+.v130-member {
+  display: grid;
+  grid-template-columns: minmax(85px, 1fr) 2fr 30px;
+  gap: 9px;
+  align-items: center;
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.v130-track {
+  height: 8px;
+  background: rgba(128, 150, 180, .15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.v130-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 12px;
+}
+
+@media (max-width: 720px) {
+  .v130-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .v130-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   v1.31 — PROŠIRENJA KALENDARA
+   ============================================================ */
+.cal31-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+
+.cal31-tools .cal31-jump {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cal31-tools input[type=date] {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  max-width: 170px;
+}
+
+.cal31-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cal31-daynav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cal31-entry {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cal31-entry:last-child {
+  border-bottom: 0;
+}
+
+.cal31-time {
+  min-width: 55px;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal31-entry .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal31-entry .name {
+  overflow-wrap: anywhere;
+}
+
+.cal31-badge {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+@media (max-width: 580px) {
+  .cal31-tools {
+    align-items: flex-start;
+  }
+  .cal31-entry {
+    gap: 7px;
+  }
+  .cal31-time {
+    min-width: 42px;
+  }
+}
+
+
+
+
+
+/* ============================================================
+   v1.31.3 — TASKS: DISKRETNO BRISANJE PRETRAGE
+   ============================================================ */
+.v1313-searchwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 190px;
+  min-width: 0;
+  max-width: 360px;
+}
+
+.v1313-searchwrap .search {
+  width: 100%;
+  padding-right: 34px;
+  min-width: 0;
+}
+
+.v1313-clear {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.v1313-clear:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.v1313-clear[hidden] {
+  display: none;
+}
+
+
+/* ============================================================
+   PREGLED POLOŽAJA PRI POVLAČENJU
+   ============================================================ */
+#dashgrid .dashcard.drag-preview-active {
+  opacity: .42;
+  outline: 2px dashed var(--muted);
+  outline-offset: -4px;
+  transition: opacity .12s ease;
+}
+
+#dashgrid .dashcard {
+  transition: transform .13s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dashgrid .dashcard {
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   v1.31.6 — SIDRENJE POVLAČENJEM MIŠA
+   ============================================================ */
+@media (min-width: 1051px) {
+  #dashgrid > .dashcard[data-side="left"],
+  #dashgrid > .dashcard[data-side="right"] {
+    grid-column-start: var(--card-side) !important;
+    grid-column-end: span var(--card-span, 2) !important;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1050px) {
+  #dashgrid > .dashcard[data-side="left"] {
+    grid-column: 1 / span min(var(--card-span, 2), 2) !important;
+  }
+  #dashgrid > .dashcard[data-side="right"] {
+    grid-column: calc(3 - min(var(--card-span, 2), 2)) / span min(var(--card-span, 2), 2) !important;
+  }
+}
+
+
+/* ============================================================
+   v1.31.7 — GUMB ZA NOVU KARTICU
+   ============================================================ */
+.dashboard-add-card-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 16px;
+  margin-bottom: 10px;
+}
+
+.dashboard-add-card-row .new-card-button {
+  position: static;
+  flex: none;
+}
 
 
 .v132-backup-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
@@ -341,46 +2990,1164 @@
 
 
 
-/* v1.32.8: stable ghost while scrolling; preserve floating masonry */
-/* Isprekidano mjesto umetanja, kao u starom prikazu premještanja. */
-#dashgrid .dashcard.drag-source{visibility:visible!important;opacity:1!important;outline:2px dashed var(--muted,#8894a5)!important;outline-offset:-4px!important;background:rgba(130,145,165,.09)!important;border-radius:12px!important}
-#dashgrid .dashcard.drag-source > *{visibility:hidden!important}
-#dashgrid .dashcard.drag-source::after{content:'Ovdje će biti kartica';visibility:visible!important;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted,#8894a5);font-size:12px;font-weight:600;pointer-events:none}
-#dashgrid .dashcard.drag-source{position:relative!important}
-.ld-drag-ghost{position:fixed!important;z-index:99999!important;pointer-events:none!important;opacity:.86;box-shadow:0 18px 48px #0003;transform:translate(-50%,-22px);max-height:65vh;overflow:hidden;border-radius:12px}
-#dashgrid .draghandle{cursor:grab;touch-action:none;user-select:none}
-html.ld-dragging,body.ld-dragging{scroll-behavior:auto!important;overflow-anchor:none!important}
-#dashgrid,#dashgrid>.dashcard{overflow-anchor:none}
+/* ============================================================
+   v1.32.8 — DRAG SOURCE I GHOST
+   ============================================================ */
+
+/* Isprekidano mjesto umetanja */
+#dashgrid .dashcard.drag-source {
+  visibility: visible !important;
+  opacity: 1 !important;
+  outline: 2px dashed var(--muted) !important;
+  outline-offset: -4px !important;
+  background: rgba(130, 145, 165, .09) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+}
+
+#dashgrid .dashcard.drag-source > * {
+  visibility: hidden !important;
+}
+
+#dashgrid .dashcard.drag-source::after {
+  content: 'Ovdje će biti kartica';
+  visibility: visible !important;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* Ghost (element koji prati miš tijekom povlačenja) */
+.ld-drag-ghost {
+  position: fixed !important;
+  z-index: 99999 !important;
+  pointer-events: none !important;
+  opacity: .86;
+  box-shadow: 0 18px 48px #0003;
+  transform: translate(-50%, -22px);
+  max-height: 65vh;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+#dashgrid .draghandle {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+html.ld-dragging,
+body.ld-dragging {
+  scroll-behavior: auto !important;
+  overflow-anchor: none !important;
+}
+
+#dashgrid,
+#dashgrid > .dashcard {
+  overflow-anchor: none;
+}
 
 
+/* ============================================================
+   GOOGLE CALENDAR PANEL
+   ============================================================ */
+.gc-panel {
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+}
 
-.gc-panel{margin-top:18px;padding:20px;border:1px solid var(--border,#e5e7eb);border-radius:16px;background:var(--card,#fff)}
-.gc-panel h3{margin:0 0 9px}.gc-muted{font-size:12px;color:var(--muted);line-height:1.6}.gc-list{display:grid;gap:9px;margin:14px 0}.gc-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--border,#e5e7eb);border-radius:10px}.gc-item label{display:flex;align-items:center;gap:8px;min-width:0}.gc-item select{max-width:145px}.gc-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.gc-panel .select{max-width:100%}.gc-panel button:disabled{opacity:.55;cursor:not-allowed}.gc-status{font-size:12px;margin:9px 0}
+.gc-panel h3 {
+  margin: 0 0 9px;
+}
+
+.gc-muted {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.gc-list {
+  display: grid;
+  gap: 9px;
+  margin: 14px 0;
+}
+
+.gc-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gc-item label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.gc-item select {
+  max-width: 145px;
+}
+
+.gc-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.gc-panel .select {
+  max-width: 100%;
+}
+
+.gc-panel button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.gc-status {
+  font-size: 12px;
+  margin: 9px 0;
+}
 
 
-.gc-setup{margin:12px 0;padding:12px;border:1px dashed var(--border,#ddd);border-radius:12px}.gc-setup summary{cursor:pointer;font-size:13px}
+/* === GC SETUP (administrator) === */
+.gc-setup {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+}
+
+.gc-setup summary {
+  cursor: pointer;
+  font-size: 13px;
+}
 
 
-#googleCalendarIntegration #gc-status{min-height:20px;line-height:1.6}
-#googleCalendarIntegration button[data-gc-connect]{cursor:pointer}
+/* === GOOGLE CALENDAR INTEGRATION === */
+#googleCalendarIntegration #gc-status {
+  min-height: 20px;
+  line-height: 1.6;
+}
+
+#googleCalendarIntegration button[data-gc-connect] {
+  cursor: pointer;
+}
 
 
+/* === GC FORM GRID === */
+.gc-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
-.gc-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gc-form-grid .field{margin:0}.gc-form-hint{font-size:12px;color:var(--muted);line-height:1.5}.gc-event-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.gc-event-actions .right{display:flex;gap:8px}@media(max-width:600px){.gc-form-grid{grid-template-columns:1fr}}
+.gc-form-grid .field {
+  margin: 0;
+}
+
+.gc-form-hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 9px 0;
+}
+
+.gc-event-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gc-event-actions .right {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .gc-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 
+/* ============================================================
+   v1.35.5 — GOOGLE/LOKALNI OBRAZAC
+   ============================================================ */
+.gce-unified > .field {
+  margin-bottom: 12px;
+}
 
-/* v1.35.5 — uredan Google/lokalni obrazac */
-.gce-unified>.field{margin-bottom:12px}
-.gce-check{display:flex;align-items:center;gap:8px;min-height:42px}
-.gce-check input{width:auto!important;min-width:16px;min-height:16px}
-.gce-unified select,.gce-unified input,.gce-unified textarea{max-width:100%;box-sizing:border-box}
-.gce-feedback{padding:10px 12px;border-radius:9px;background:rgba(200,70,55,.09);color:var(--text);font-size:12px;line-height:1.45}
-.gce-feedback[hidden],#gce-repeat-wrap[hidden]{display:none!important}
-.gce-danger{color:#b63333}
-.gc-form-hint{margin:9px 0;color:var(--muted)}
-@media(max-width:600px){.gc-event-actions .right{width:100%;justify-content:flex-end}}
+.gce-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+}
 
+.gce-check input {
+  width: auto !important;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+.gce-unified select,
+.gce-unified input,
+.gce-unified textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.gce-feedback {
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: rgba(200, 70, 55, .09);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.gce-feedback[hidden],
+#gce-repeat-wrap[hidden] {
+  display: none !important;
+}
+
+.gce-danger {
+  color: var(--red);
+}
+
+@media (max-width: 600px) {
+  .gc-event-actions .right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
 
 
 @media(max-width:720px){#v125SearchBtn{bottom:calc(78px + env(safe-area-inset-bottom));}}
+
+/* ============================================================
+   v1.43 — TABOVI U POSTAVKAMA
+   ============================================================ */
+.settings-tabs {
+  display: flex;
+  gap: 5px;
+  margin: 0 0 18px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.settings-tab {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 11px 16px;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  bottom: -1px;
+  transition: color .12s, background .12s;
+}
+
+.settings-tab:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.settings-tab.active {
+  color: var(--blue);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-bottom-color: var(--panel);
+}
+
+.settings-panel {
+  padding: 0;
+}
+
+.settings-panel[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .settings-tab {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+  .settings-tabs {
+    gap: 3px;
+  }
+}
+
+/* ============================================================
+   v1.50 — TIPOGRAFSKA KONZISTENTNOST
+   ============================================================ */
+
+/* === NASLOVI === */
+.topbar h1 {
+  font-size: var(--fs-xl) !important;
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-bold);
+}
+
+.modal h2 {
+  font-size: var(--fs-xl) !important;
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-bold);
+  margin: 0 0 var(--sp-4);
+}
+
+.auth-brand {
+  font-size: var(--fs-xl) !important;
+  font-weight: var(--fw-bold);
+}
+
+.card h3,
+.dashcard .cardhead h3,
+.shop-section h3,
+.notes-card h3,
+.lane h4,
+.calendarbar h3,
+.gc-panel h3 {
+  font-size: var(--fs-lg) !important;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+}
+
+
+/* === GLAVNI TEKST === */
+body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+}
+
+.item .name,
+.tile,
+.day-entry .name,
+.shop-item .shop-name,
+.notes-row .name,
+.task-desc,
+.quicktile-name,
+.settings-tab,
+.v129-event-title,
+.v123-log .name,
+.chore-filters label,
+.task-filters label,
+#filter,
+.search,
+input,
+select,
+textarea {
+  font-size: var(--fs-md) !important;
+}
+
+
+/* === SEKUNDARNI TEKST === */
+.tiny,
+.sub,
+.item .meta,
+.pill,
+.field,
+.field label,
+.shop-item .shop-meta,
+.day-entry .meta,
+.notes-meta,
+.gc-muted,
+.notice,
+.gc-status,
+.gc-form-hint,
+.forecast div,
+.callegend,
+.v128-late,
+.v128-pause,
+.v127p-meta,
+.v127p-title,
+.shop-summary,
+.gce-feedback {
+  font-size: var(--fs-sm) !important;
+  line-height: var(--lh-normal);
+}
+
+
+/* === NAJMANJI TEKST === */
+.tag,
+.caldays,
+.stat span,
+.view-all-link,
+.view-all-link span,
+.v129-count,
+.v129-event-meta,
+.v123-log .meta,
+.cal31-count,
+.cal31-time,
+.cal31-badge,
+.notes-label,
+.v127p-count {
+  font-size: var(--fs-xs) !important;
+}
+
+
+/* === VELIKI BROJEVI === */
+.stat strong,
+.v123-metric strong,
+.v130-stat strong,
+.weather strong {
+  font-size: var(--fs-xxl) !important;
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+
+/* === HEADER CLOCK === */
+.header-clock {
+  font-size: var(--fs-xs) !important;
+}
+
+.header-clock strong {
+  font-size: var(--fs-sm) !important;
+  font-weight: var(--fw-semibold);
+}
+
+
+/* === FORME === */
+.field {
+  font-size: var(--fs-sm) !important;
+  color: var(--muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  font-size: var(--fs-md) !important;
+}
+
+button,
+.primary,
+.smallbtn,
+.iconbtn {
+  font-size: var(--fs-md);
+}
+
+.smallbtn {
+  padding: 8px 11px;
+}
+
+.iconbtn {
+  padding: 9px 11px;
+}
+
+
+/* === MODALI === */
+.modal {
+  padding: var(--sp-6);
+}
+
+.actions {
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+
+/* === SIDEBAR === */
+.brand {
+  font-size: var(--fs-lg) !important;
+}
+
+.nav button {
+  font-size: var(--fs-md) !important;
+}
+
+.sidefoot {
+  font-size: var(--fs-xs) !important;
+}
+
+
+/* === SETTINGS TABOVI === */
+.settings-tab {
+  font-size: var(--fs-md) !important;
+  font-weight: var(--fw-semibold);
+}
+
+
+/* === FONT RENDER === */
+body,
+input,
+select,
+textarea,
+button {
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ============================================================
+   SETTINGS PANELI
+   ============================================================ */
+.settings-panel {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+}
+
+.settings-panel[hidden] {
+  display: none !important;
+}
+
+.settings-panel .card {
+  padding: var(--sp-5);
+  margin: 0;
+}
+
+.settings-panel .notice {
+  margin-bottom: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.settings-panel .setting {
+  padding: var(--sp-3) 0;
+}
+
+.settings-panel .setting:first-child {
+  padding-top: 0;
+}
+
+.settings-panel .setting:last-child {
+  padding-bottom: 0;
+}
+
+.settings-panel .card > h3 {
+  margin: 0 0 var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.settings-panel .grid2 {
+  gap: var(--sp-4);
+}
+
+.settings-panel[data-settings-panel="napredno"] .grid2 {
+  grid-template-columns: 1fr;
+}
+
+
+/* ============================================================
+   BORDER-RADIUS
+   ============================================================ */
+.card {
+  border-radius: var(--r-lg) !important;
+}
+
+.gc-panel {
+  border-radius: var(--r-lg) !important;
+}
+
+.gc-item {
+  border-radius: var(--r-md) !important;
+}
+
+.modal {
+  border-radius: var(--r-xl) !important;
+}
+
+.smallbtn,
+.iconbtn,
+.primary,
+.select,
+.search,
+.tinybtn,
+.v129-page button {
+  border-radius: var(--r-md) !important;
+}
+
+.field input,
+.field select,
+.field textarea,
+.modal input,
+.modal select,
+.modal textarea {
+  border-radius: var(--r-md) !important;
+}
+
+.tag,
+.pill,
+.notes-label,
+.shop-chip {
+  border-radius: var(--r-full) !important;
+}
+
+.tile,
+.lane {
+  border-radius: var(--r-md) !important;
+}
+
+.quick.quickgrid .quicktile {
+  border-radius: var(--r-md) !important;
+}
+
+.calgrid button {
+  border-radius: var(--r-md) !important;
+}
+
+.nav button {
+  border-radius: var(--r-md) !important;
+}
+
+.brand i {
+  border-radius: var(--r-md) !important;
+}
+
+.toast {
+  border-radius: var(--r-md) !important;
+}
+
+.menu {
+  border-radius: var(--r-lg) !important;
+}
+
+#v127Panel {
+  border-radius: var(--r-lg) !important;
+}
+
+.v125-dialog {
+  border-radius: var(--r-xl) !important;
+}
+
+.v125-result {
+  border-radius: var(--r-md) !important;
+}
+
+#authGate .auth-box {
+  border-radius: var(--r-xl) !important;
+}
+
+#authGate input {
+  border-radius: var(--r-md) !important;
+}
+
+#authGate .auth-submit {
+  border-radius: var(--r-md) !important;
+}
+
+#authGate .auth-tabs {
+  border-radius: var(--r-md) !important;
+}
+
+.auth-top-btn {
+  border-radius: var(--r-md) !important;
+}
+
+.notes-editor {
+  border-radius: var(--r-md) !important;
+}
+
+.chore-days label {
+  border-radius: var(--r-sm) !important;
+}
+
+.chore-more {
+  border-radius: var(--r-md) !important;
+}
+
+.repeat-end-panel {
+  border-radius: var(--r-md) !important;
+}
+
+.shop-section {
+  border-radius: var(--r-lg) !important;
+}
+
+.v123-metric,
+.v130-stat,
+.v130-panel {
+  border-radius: var(--r-md) !important;
+}
+
+.v130-track,
+.v130-fill,
+.v123-bar-track,
+.v123-bar-fill {
+  border-radius: var(--r-full) !important;
+}
+
+.customcard {
+  border-radius: var(--r-lg) !important;
+}
+
+.v127p-head,
+.v127p-entry,
+.v127p-footer {
+  border-radius: 0 !important;
+}
+
+
+/* ============================================================
+   LISTE — PADDING I GAP
+   ============================================================ */
+.item {
+  padding: 10px 0 !important;
+  gap: var(--sp-2) !important;
+}
+
+.item .info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item .meta {
+  margin-top: 0 !important;
+}
+
+.shop-item {
+  padding: 10px 0 !important;
+  gap: var(--sp-2) !important;
+}
+
+.shop-item .shop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shop-item .shop-meta {
+  margin-top: 0 !important;
+}
+
+.notes-row {
+  padding: 10px 0 !important;
+  gap: var(--sp-2) !important;
+}
+
+.notes-row .info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.day-entry {
+  padding: 10px 0 !important;
+  gap: var(--sp-2) !important;
+}
+
+.day-entry .info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cal31-entry {
+  padding: 8px 0 !important;
+}
+
+.v129-event {
+  padding: 10px 0 !important;
+}
+
+.v123-log {
+  padding: 10px 0 !important;
+}
+
+.v126-fav {
+  padding: 10px 4px !important;
+}
+
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--sp-2) !important;
+}
+
+.stat {
+  padding: 10px !important;
+  border-radius: var(--r-md) !important;
+}
+
+.stat strong {
+  font-size: 20px !important;
+  line-height: 1.1 !important;
+}
+
+.stat span {
+  font-size: 11px !important;
+}
+
+
+/* ============================================================
+   KALENDAR
+   ============================================================ */
+.calgrid button {
+  height: 42px !important;
+}
+
+.calgrid {
+  gap: 2px !important;
+}
+
+.caldays {
+  margin-bottom: 4px !important;
+}
+
+.dots {
+  bottom: 4px !important;
+}
+
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.dashgrid {
+  gap: var(--sp-2) !important;
+  grid-auto-rows: 2px !important;
+  row-gap: var(--sp-2) !important;
+  column-gap: var(--sp-2) !important;
+}
+
+.dashcard {
+  padding: 0 !important;
+}
+
+.card,
+.dashcard > .card,
+.settings-panel .card,
+.gc-panel,
+.customcard,
+.shop-section {
+  padding: var(--sp-4) !important;
+}
+
+.modal {
+  padding: 22px !important;
+}
+
+.cardhead {
+  margin-bottom: 10px !important;
+}
+
+.quick.quickgrid .quicktile {
+  height: 34px !important;
+  min-height: 34px !important;
+}
+
+.settings-panel {
+  gap: var(--sp-3) !important;
+}
+
+
+/* ============================================================
+   RAZMAK OD RUBA DO CHECKBOXA
+   ============================================================ */
+.item,
+.shop-item,
+.notes-row,
+.day-entry {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+
+/* ============================================================
+   OBOJENI RUB ZADATAKA
+   ============================================================ */
+.item.has-member-color {
+  box-shadow: inset 3px 0 0 0 var(--member-color);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-left: 14px !important;
+}
+
+.dashgrid{
+  grid-auto-rows:4px!important;
+  row-gap:var(--sp-3)!important;
+  column-gap:var(--sp-4)!important;
+}
+
+
+/* ============================================================
+   FINALNE DEFINICIJE — POBJEĐUJU SVE PRETHODNE
+   ============================================================ */
+
+
+/* ============================================================
+   DASHBOARD GRID
+   ============================================================ */
+.dashgrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  grid-auto-rows: 2px !important;
+  grid-auto-flow: row dense;
+  gap: var(--sp-2) !important;
+  align-items: start;
+}
+
+.dashgrid > .dashcard {
+  grid-column: span var(--card-span, 2) !important;
+  min-width: 0;
+  align-self: start;
+  padding: 0 !important;
+  cursor: default;
+}
+
+.dashgrid > .dashcard > .card {
+  height: 100%;
+  padding: var(--sp-4) var(--sp-4) var(--sp-5) !important;
+  box-shadow: none;
+  border: 0;
+}
+
+.dashgrid .new-card-button {
+  grid-column: 1 / -1 !important;
+  align-self: start;
+  justify-self: start;
+}
+
+@media (max-width: 1050px) {
+  .dashgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .dashgrid > .dashcard {
+    grid-column: span min(var(--card-span, 2), 2) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .dashgrid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .dashgrid > .dashcard {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+
+/* ============================================================
+   DASHBOARD CARD — HEADER I TOOLBAR
+   ============================================================ */
+.dashcard .cardhead {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-3);
+}
+
+.dashcard .cardhead h3 {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.dashcard .cardtools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.dashcard .draghandle,
+.dashcard .tinybtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dashcard .draghandle {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.dashcard .draghandle:hover,
+.dashcard .tinybtn:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.dashcard .cardtools {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.dashcard:hover .cardtools,
+.dashcard:focus-within .cardtools {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (hover: none) {
+  .dashcard .cardtools {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+/* ============================================================
+   QUICK LINKS GRID
+   ============================================================ */
+.quick.quickgrid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--sp-1) !important;
+  align-items: start;
+  grid-auto-flow: row;
+}
+
+.quick.quickgrid .quicktile {
+  position: relative;
+  grid-column: span var(--quick-span, 1);
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: transparent;
+  overflow: hidden;
+  transition: background .15s, border-color .15s;
+}
+
+.quick.quickgrid .quicktile:hover,
+.quick.quickgrid .quicktile:focus-within {
+  background: var(--bg);
+  border-color: var(--blue);
+}
+
+.quick.quickgrid .quicktile .quicktile-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sp-1);
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--sp-3);
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--fs-xs);
+  overflow: hidden;
+}
+
+.quick.quickgrid .quicktile .quicktile-name {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--fw-medium);
+}
+
+.quick.quickgrid .quicktile .quickarrow {
+  flex: none;
+  margin-left: 2px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.quick.quickgrid .quicktile .quicktile-actions {
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 1px;
+  padding: 1px 2px;
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.quick.quickgrid .quicktile:hover .quicktile-actions,
+.quick.quickgrid .quicktile:focus-within .quicktile-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick.quickgrid .quicktile .quickdrag,
+.quick.quickgrid .quicktile .quicksettings {
+  display: grid;
+  place-items: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 22px;
+  border: 0;
+  border-radius: var(--r-xs);
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.quick.quickgrid .quicktile.dragging {
+  opacity: .4;
+  border-style: dashed;
+}
+
+@media (hover: none) {
+  .quick.quickgrid .quicktile .quicktile-actions {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .quick.quickgrid {
+    gap: var(--sp-1) !important;
+  }
+  .quick.quickgrid .quicktile {
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+  .quick.quickgrid .quicktile .quicktile-link {
+    padding: 0 var(--sp-2);
+  }
+  .quick.quickgrid .quicktile .quicktile-name {
+    font-size: 10px;
+  }
+}
+
+/* ============================================================
+   STABILNA ŠIRINA — bez pomicanja layouta kad se pojavi scrollbar
+   ============================================================ */
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}

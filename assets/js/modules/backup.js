@@ -14,7 +14,7 @@
  settings=function(){
   const html=previousSettings();
   const panel='<div class="card"><h3>Sigurnosna kopija podataka</h3><div class="notice">Ručno spremi lokalne podatke Life Dashboarda u JSON datoteku ili vrati prethodnu kopiju.</div><div class="v132-backup-actions"><button type="button" class="smallbtn" data-v132-export>↓ Preuzmi sigurnosnu kopiju</button><button type="button" class="smallbtn" data-v132-import>↑ Vrati iz sigurnosne kopije</button></div><p class="v132-backup-note">Vraćanje zamjenjuje trenutačne lokalne podatke. Prije vraćanja preporučujemo preuzeti novu kopiju. Datoteka ostaje na tvom računalu; ništa se ne šalje na internet.</p><input id="v132-import-file" type="file" accept=".json,application/json" style="display:none"></div>';
-  return html.replace(/<\/div>\s*$/,panel+'</div>');
+  return html.replace('<div class="settings-panel" data-settings-panel="napredno" hidden>','<div class="settings-panel" data-settings-panel="napredno" hidden>'+panel);
  };
  function downloadBackup(){
   const values={};backupKeys().forEach(k=>values[k]=localStorage.getItem(k));

@@ -13,7 +13,7 @@ form=function(type,id){
  <div class="grid2"><label class="field">Rok<input id="fDue" type="date" value="${esc(dateForCalendar(o.due)||localISO(new Date()))}"></label>
  <label class="field">Prioritet<select id="fPriority">${selected(['Nizak','Srednji','Visok'],o.priority||'Srednji')}</select></label></div>
  <div class="grid2"><label class="field">Status<select id="fStatus">${selected(['Novo','U tijeku','Gotovo'],o.status||'Novo')}</select></label>
- <label class="field">Dodijeljeno<select id="fWho">${selected(['Emanuel','Lucia','Oboje','Svi'],o.who||'Emanuel')}</select></label></div>
+ <label class="field">Dodijeljeno<select id="fWho">${window.lifeMembersOptions?window.lifeMembersOptions(o.who||'Svi'):'<option>Svi</option>'}</select></label>
  <label class="field">Ponavljanje<select id="fRepeat">${selected(['Ne ponavlja se','Svaki dan','Svaki tjedan','Svaki mjesec','Svake godine'],o.repeat||'Ne ponavlja se')}</select></label>
  <div class="notice">Ponavljanje: kada označiš zadatak dovršenim, izradit će se sljedeći termin. Podaci ostaju lokalno u ovom pregledniku.</div>`,
  `<button class="smallbtn" data-close>Odustani</button>${id?`<button class="smallbtn" data-delete="Tasks:${id}">Premjesti u koš</button><button class="smallbtn" data-duplicate="Tasks:${id}">Dupliciraj</button>`:''}<button class="primary" data-save="Tasks:${id}">Spremi</button>`);
@@ -31,7 +31,10 @@ saveForm=function(type,id){
 itemHTML=function(o,type){
  if(type!=='Tasks')return v117OldItem(o,type);
  const done=o.done||o.status==='Gotovo';
- return `<div class="item ${done?'done':''}"><input type="checkbox" data-toggle="Tasks:${o.id}" ${done?'checked':''} aria-label="Dovrši ${esc(o.name)}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(o.due||'Bez roka')} · ${esc(o.who||'Nedodijeljeno')} · <span class="${o.priority==='Visok'?'task-priority-high':''}">${esc(o.priority||'Srednji')} prioritet</span></div>${o.description?`<div class="task-desc">${esc(o.description)}</div>`:''}${o.repeat&&o.repeat!=='Ne ponavlja se'?`<div class="task-detail">↻ ${esc(o.repeat)}</div>`:''}</div><button class="smallbtn" data-edit="Tasks:${o.id}" title="Uredi zadatak">⋯</button></div>`;
+ const memberColor=(o.who&&window.lifeColorForMember)?window.lifeColorForMember(o.who):null;
+ const cls=memberColor?' has-member-color':'';
+ const styleAttr=memberColor?` style="--member-color:${memberColor}"`:'';
+ return `<div class="item${cls} ${done?'done':''}"${styleAttr}><input type="checkbox" data-toggle="Tasks:${o.id}" ${done?'checked':''} aria-label="Dovrši ${esc(o.name)}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(o.due||'Bez roka')} · ${esc(o.who||'Nedodijeljeno')} · <span class="${o.priority==='Visok'?'task-priority-high':''}">${esc(o.priority||'Srednji')} prioritet</span></div>${o.description?`<div class="task-desc">${esc(o.description)}</div>`:''}${o.repeat&&o.repeat!=='Ne ponavlja se'?`<div class="task-detail">↻ ${esc(o.repeat)}</div>`:''}</div><button class="smallbtn" data-edit="Tasks:${o.id}" title="Uredi zadatak">⋯</button></div>`;
 };
 collection=function(type){
  if(type!=='Tasks')return v117OldCollection(type);
@@ -89,7 +92,9 @@ form=function(type,id){
  <div class="grid2"><label class="field">Rok<input id="fDue" type="date" value="${esc(dateForCalendar(o.due)||localISO(new Date()))}"></label><label class="field">Vrijeme podsjetnika<input id="fReminderTime" type="time" value="${esc(o.reminderTime||'15:00')}"></label></div>
  <div class="grid2"><label class="field">Status<select id="fStatus">${choreOptions(['Novo','U tijeku','Gotovo','Pauzirano'],o.status||'Novo')}</select></label><label class="field">Prioritet<select id="fPriority">${choreOptions(['Nizak','Srednji','Visok'],o.priority||'Srednji')}</select></label></div>
  <div class="grid2"><label class="field">Kategorija<select id="fCategory">${choreOptions([...new Set([...choreCategories,o.category].filter(Boolean))],o.category||'Ostalo')}</select></label><label class="field">Područje<select id="fArea">${choreOptions([...new Set([...choreAreas,o.area].filter(Boolean))],o.area||'Kuća')}</select></label></div>
- <label class="field">Dodijeljeno<select id="fWho">${choreOptions(['Emanuel','Lucia','Oboje','Svi'],o.who||'Svi')}</select></label>
+ 
+ <label class="field">Dodijeljeno<select id="fWho">${window.lifeMembersOptions?window.lifeMembersOptions(o.who||'Svi'):'<option>Svi</option>'}</select></label>
+ 
  <label class="field">Ponavljanje<select id="fRepeat">${choreOptions(['Ne ponavlja se','Svaki dan','Svaki tjedan','Odabrani dani','Svaki mjesec','Svake godine'],o.repeat||'Ne ponavlja se')}</select></label>
  <div class="field">Dani ponavljanja (za „Odabrani dani”)</div><div class="chore-days">${[['Pon',1],['Uto',2],['Sri',3],['Čet',4],['Pet',5],['Sub',6],['Ned',0]].map(([label,num])=>`<label><input type="checkbox" class="chore-weekday" value="${num}" ${selectedDays.includes(num)?'checked':''}>${label}</label>`).join('')}</div>
  <details class="chore-more" ${o.notes||o.estimatedCost||o.actualCost||o.imageUrl||o.pauseUntil?'open':''}><summary>Više detalja</summary>
@@ -135,7 +140,10 @@ itemHTML=function(o,type){
  const done=o.done||o.status==='Gotovo',late=choreOverdue(o),paused=o.status==='Pauzirano';
  const money=(v)=>v!==''&&v!==undefined&&v!==null?Number(v).toLocaleString('hr-HR',{style:'currency',currency:'EUR'}):'';
  const cost=(o.estimatedCost!==''&&o.actualCost!==''&&o.estimatedCost!=null&&o.actualCost!=null)?` · Razlika: ${money(Number(o.actualCost)-Number(o.estimatedCost))}`:'';
- return `<div class="item ${done?'done':''}"><input type="checkbox" data-toggle="Chores:${o.id}" ${done?'checked':''} aria-label="Dovrši ${esc(o.name)}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(o.due||'Bez roka')} · ${esc(o.category||'Ostalo')} · ${esc(o.area||'Kuća')} · ${esc(o.who||'Svi')}${esc(cost)}</div>${o.description?`<div class="task-desc">${esc(o.description)}</div>`:''}${o.repeat&&o.repeat!=='Ne ponavlja se'?`<div class="task-detail">↻ ${esc(o.repeat)}</div>`:''}${done&&o.completedAt?`<div class="task-detail">✓ ${esc(o.completedBy)} · ${esc(o.completedAt)}</div>`:''}</div>${late?'<span class="tag warn">Zakašnjelo</span>':paused?'<span class="tag">Pauzirano</span>':done?'<span class="tag green">Gotovo</span>':''}<button class="smallbtn" data-edit="Chores:${o.id}" title="Uredi posao">⋯</button></div>`;
+ const memberColor=(o.who&&window.lifeColorForMember)?window.lifeColorForMember(o.who):null;
+ const cls=memberColor?' has-member-color':'';
+ const styleAttr=memberColor?` style="--member-color:${memberColor}"`:'';
+ return `<div class="item${cls} ${done?'done':''}"${styleAttr}><input type="checkbox" data-toggle="Chores:${o.id}" ${done?'checked':''} aria-label="Dovrši ${esc(o.name)}"><div class="info"><div class="name">${esc(o.name)}</div><div class="meta">${esc(o.due||'Bez roka')} · ${esc(o.category||'Ostalo')} · ${esc(o.area||'Kuća')} · ${esc(o.who||'Svi')}${esc(cost)}</div>${o.description?`<div class="task-desc">${esc(o.description)}</div>`:''}${o.repeat&&o.repeat!=='Ne ponavlja se'?`<div class="task-detail">↻ ${esc(o.repeat)}</div>`:''}${done&&o.completedAt?`<div class="task-detail">✓ ${esc(o.completedBy)} · ${esc(o.completedAt)}</div>`:''}</div>${late?'<span class="tag warn">Zakašnjelo</span>':paused?'<span class="tag">Pauzirano</span>':done?'<span class="tag green">Gotovo</span>':''}<button class="smallbtn" data-edit="Chores:${o.id}" title="Uredi posao">⋯</button></div>`;
 };
 collection=function(type){
  if(type!=='Chores')return v118OldCollection(type);

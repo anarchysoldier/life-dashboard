@@ -1,5 +1,5 @@
-
-/* v1.35.7: Google Calendar with private per-user offline IndexedDB snapshot. */
+/* v1.35.7: Google Calendar with private per-user offline IndexedDB snapshot.
+   v1.44: Panel se ubacuje unutar "Napredno" taba u Postavkama. */
 (function(){
 
 async function gcProxy(action,payload={}){
@@ -72,7 +72,11 @@ window.lifeGoogleAuthChanged=function(uid){
 const save=()=>localStorage.setItem(STORE,JSON.stringify(cfg));
 const htmlEscape=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const originalSettings=settings;
-settings=function(){return originalSettings()+`<section class="gc-panel" id="googleCalendarIntegration"><h3>📅 Integracije · Google Calendar</h3><p class="gc-muted">Poveži Google račun i odaberi kalendare za sinkronizaciju. Posljednji uspješno učitani događaji čuvaju se na ovom uređaju i dostupni su i pri prekidu Google veze. Google autorizacija sigurno se čuva na Supabaseu.</p><div id="gc-ui"></div></section>`};
+settings=function(){
+  const html=originalSettings();
+  const panel='<section class="gc-panel" id="googleCalendarIntegration"><h3>📅 Integracije · Google Calendar</h3><p class="gc-muted">Poveži Google račun i odaberi kalendare za sinkronizaciju. Posljednji uspješno učitani događaji čuvaju se na ovom uređaju i dostupni su i pri prekidu Google veze. Google autorizacija sigurno se čuva na Supabaseu.</p><div id="gc-ui"></div></section>';
+  return html.replace('<div class="settings-panel" data-settings-panel="napredno" hidden>','<div class="settings-panel" data-settings-panel="napredno" hidden>'+panel);
+};
 window.lifeGoogleBridge={
  get events(){return googleEvents},get connected(){return connected},get checking(){return connectionChecking},get cfg(){return cfg},
  get cachedAt(){return cacheUpdatedAt},

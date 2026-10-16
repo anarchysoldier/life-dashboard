@@ -43,7 +43,9 @@ function unlock(user){
   const metaName=user.user_metadata?.full_name||user.user_metadata?.name||'';
   window.lifeCurrentUserName=metaName||(user.email?user.email.split('@')[0]:'Korisnik');
   window.lifeGoogleAuthChanged?.(user.id);
+  
   window.lifeDashboardSyncReady?.(user.id);
+  window.lifeDashboardMembersChanged?.(user.id);
   gate.hidden=true;
   document.body.classList.remove('auth-locked');
   addAccountButton(user);
@@ -195,14 +197,7 @@ el('authForgot').addEventListener('click',async()=>{
     message('Ako račun postoji, poslana je poveznica za reset lozinke.',true);
   }catch(e){message(e.message)}
 });
-document.addEventListener('click',async e=>{
-  if(e.target.closest('#lifeAccountBtn')){
-    if(!client)return;
-    const {error}=await client.auth.signOut();
-    if(error)alert(error.message);
-    else{el('authPassword').value='';lock()}
-  }
-});
+
 window.addEventListener('load',()=>{
   el('authUrl').value=config.url||'';
   el('authKey').value=config.key||'';
